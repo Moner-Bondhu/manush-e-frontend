@@ -1,0 +1,7 @@
+{
+  "name": "manush-e-mvp-1",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}

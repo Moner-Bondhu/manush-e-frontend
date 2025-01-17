@@ -7,7 +7,7 @@
                     <h2 class="text-xl text-center">Welcome to <span class="text-red-600">Manush-E</span></h2>
                     <ion-img src="/public/intro.png" class="w-[65%] mx-auto my-4"></ion-img>
 
-                    <div class="mt-">
+                    <div class="">
 
                         <p class="text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit voluptas
                             odio voluptatum

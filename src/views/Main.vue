@@ -1,23 +1,17 @@
 <template>
     <ion-page>
-        <!-- <ion-header>
-            <ion-toolbar>
-                <ion-title class="text-center">Moner Bondhu</ion-title>
-            </ion-toolbar>
-        </ion-header> -->
         <ion-content :fullscreen="true">
-            <section class=" flex w-full items-center justify-center h-full  p-3">
+            <section class="flex w-full items-center justify-center h-full p-3">
                 <div class="p-4 w-full">
                     <img src="../resources/icon.png" alt="Moner Bondhu Logo" class="mb-8" />
-                    <h2 class="mb-4">Welcom to Manush<span class="text-red-500">E</span> </h2>
-                    <form action="" class="flex justify-between">
-                        <input type="text"
-                            class="shadow-xs flex w-full items-center justify-center rounded-lg border border-stroke bg-white p-2  text-lg font-medium text-gray-5 outline-none  " />
-
+                    <h2 class="mb-4">Welcome to Manush<span class="text-red-500">E</span></h2>
+                    <form @submit.prevent="handleSubmit" class="flex flex-col">
+                        <input v-model="number" type="number" placeholder="Enter a number"
+                            class="shadow-xs w-full rounded-lg border border-stroke bg-white p-2 text-lg font-medium text-gray-500 outline-none" />
+                        <ion-button type="submit" expand="block" fill="outline" class="mt-4">
+                            Continue
+                        </ion-button>
                     </form>
-                    <ion-button expand="block" fill="outline" class="mt-4">
-                        LOGIN
-                    </ion-button>
                 </div>
             </section>
         </ion-content>
@@ -25,10 +19,23 @@
 </template>
 
 <script setup lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonButton, IonIcon } from '@ionic/vue';
+import { IonPage, IonContent, IonButton } from '@ionic/vue';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
-import { heart, logoApple, settingsSharp, star } from 'ionicons/icons';
+const number = ref('');
+const router = useRouter();
+
+const handleSubmit = () => {
+    if (number.value) {
+        // Navigate to /choice
+        router.push('/choice');
+    } else {
+        alert('Please enter a number!');
+    }
+};
 </script>
+
 <style scoped>
 * {
     font-family: 'Poppins', sans-serif !important;
@@ -36,12 +43,7 @@ import { heart, logoApple, settingsSharp, star } from 'ionicons/icons';
 
 ion-button {
     --background: #ce2327;
-
-
     --color: white;
-
-
     --border-width: 0px;
-
 }
 </style>

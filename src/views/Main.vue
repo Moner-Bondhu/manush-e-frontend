@@ -1,11 +1,11 @@
 <template>
     <ion-page>
         <ion-content :fullscreen="true">
-            <ion-img src="/public/mb-logo.svg" class="w-[100px] mx-auto my-4"></ion-img>
+            <ion-img src="/mb-logo.svg" class="w-[100px] mx-auto my-4"></ion-img>
             <section class="flex flex-col w-full items-center justify-center  p-3">
                 <div class="p-4  w-full">
                     <h2 class="text-xl text-center">Welcome to <span class="text-red-600">Manush-E</span></h2>
-                    <ion-img src="/public/intro.png" class="w-[65%] mx-auto my-4"></ion-img>
+                    <ion-img src="/intro.png" class="w-[65%] mx-auto my-4"></ion-img>
 
                     <div class="">
 

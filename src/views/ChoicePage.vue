@@ -39,7 +39,7 @@
                 <div class="flex gap-4 mt-4">
                     <div class=" w-full shadow min-h-[150px] rounded-lg mx-auto   border p-3" @click="navigateToBoxA">
                         <div class="c items-center justify-center">
-                            <ion-img src="/public/Children.png" class="w-[70px] mx-auto "></ion-img>
+                            <ion-img src="/Children.png" class="w-[70px] mx-auto "></ion-img>
                         </div>
                         <div class="">
                             <h2 class="text-lg my-0 text-red-600 tracking-wider	font-semibold  text-center">CHILD</h2>
@@ -50,7 +50,7 @@
                     <div class=" gap-4  w-full shadow min-h-[150px] rounded-lg mx-auto  border  p-3"
                         @click="navigateToBoxB">
                         <div class="col-span-2 ">
-                            <ion-img src="/public/Parents.png" class="w-[70px] mx-auto "></ion-img>
+                            <ion-img src="/Parents.png" class="w-[70px] mx-auto "></ion-img>
                         </div>
                         <div class="col-span-3 ">
                             <h2 class="text-lg my-0 text-red-600 tracking-wider	font-semibold text-center">PARENT</h2>

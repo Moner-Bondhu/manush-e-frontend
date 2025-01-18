@@ -41,7 +41,7 @@
                             @click="navigateToBoxC">
                             <div class="flex items-center">
                                 <div class="flex items-center gap-1">
-                                    <ion-img src="/public/sleep.svg" class="w-4 "></ion-img>
+                                    <ion-img src="/sleep.svg" class="w-4 "></ion-img>
                                     <h2 class="text-lg my-0 text-black">Sleep</h2>
                                 </div>
                                 <p class="ml-auto text-xs text-gray-800 w-fit bg-green-300 px-2 py-1 rounded-lg">
@@ -62,7 +62,7 @@
                         <div class="w-full p-3 border border-gray-200 rounded-lg shadow bg-red-100">
                             <div class="flex items-center">
                                 <div class="flex items-center gap-1">
-                                    <ion-img src="/public/sleep.svg" class="w-4 "></ion-img>
+                                    <ion-img src="/sleep.svg" class="w-4 "></ion-img>
                                     <h2 class="text-lg my-0 text-black">Sleep</h2>
                                 </div>
                                 <p class="ml-auto text-xs text-gray-800 w-fit bg-red-300 px-2 py-1 rounded-lg">
@@ -108,7 +108,7 @@
                             style="opacity: 50%;">
                             <div class="flex items-center">
                                 <div class="flex items-center gap-1">
-                                    <ion-img src="/public/sleep.svg" class="w-4 "></ion-img>
+                                    <ion-img src="/sleep.svg" class="w-4 "></ion-img>
                                     <h2 class="text-lg my-0 text-black">Mental Wellbeing</h2>
                                 </div>
                                 <p class="ml-auto text-xs text-gray-800 w-fit bg-white px-2 py-1 rounded-lg">

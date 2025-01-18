@@ -24,7 +24,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/quizA',
-    component: () => import('@/views/Main.vue') // Page for Box A
+    component: () => import('@/views/Question.vue') // Page for Box A
   }
 ];
 

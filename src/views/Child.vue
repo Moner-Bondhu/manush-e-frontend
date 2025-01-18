@@ -21,8 +21,8 @@
 
 
             <h3 class="my-0 text-lg">January</h3>
-            <p class="text-xs">Lorem ipsum dolor sit amet consectetur, </p>
-            <ol class="relative text-gray-500 border-s border-gray-200  m-4">
+            <p class="text-xs">Let's see what we have for this month</p>
+            <ol class="relative text-gray-500 border-s border-gray-200 mt-8 m-4">
                 <li class="mb-10 ms-6">
                     <span
                         class="absolute flex items-center justify-center w-6 h-6 bg-gray-200 rounded-full -start-4 ring-4 ring-white ">
@@ -33,6 +33,8 @@
                         </svg>
                         <!-- <span class="w-3 h-3 bg-white rounded-full"></span> -->
                     </span>
+                    <h2 class="text-lg mb-4 text-black">Week 1</h2>
+
                     <div class=" flex flex-col gap-2">
 
                         <div class="w-full p-3 border border-gray-200 rounded-lg shadow bg-blue-100"
@@ -85,14 +87,25 @@
                 <li class="mb-10 ms-6">
                     <span
                         class="absolute flex items-center justify-center w-6 h-6 bg-gray-100 rounded-full -start-4 ring-4 ring-white">
-                        <svg class="w-2.5 h-2.5 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor" viewBox="0 0 20 16">
-                            <path
-                                d="M18 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM6.5 3a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3.014 13.021l.157-.625A3.427 3.427 0 0 1 6.5 9.571a3.426 3.426 0 0 1 3.322 2.805l.159.622-6.967.023ZM16 12h-3a1 1 0 0 1 0-2h3a1 1 0 0 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Zm0-3h-3a1 1 0 1 1 0-2h3a1 1 0 1 1 0 2Z" />
+                        <svg fill="#000000" height="8px" width="8px" version="1.1" id="XMLID_287_"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                            viewBox="0 0 24 24" xml:space="preserve">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <g id="next">
+                                    <g>
+                                        <polygon points="6.8,23.7 5.4,22.3 15.7,12 5.4,1.7 6.8,0.3 18.5,12 "></polygon>
+                                    </g>
+                                </g>
+                            </g>
                         </svg>
                     </span>
+                    <h2 class="text-lg mb-4 text-black">Week 2</h2>
+
                     <div class=" flex flex-col gap-2">
-                        <div class="w-full p-3 border border-gray-200 rounded-lg shadow bg-blue-200">
+                        <div class="w-full p-3 border border-gray-200 rounded-lg shadow bg-blue-200"
+                            style="opacity: 50%;">
                             <div class="flex items-center">
                                 <div class="flex items-center gap-1">
                                     <ion-img src="/public/sleep.svg" class="w-4 "></ion-img>

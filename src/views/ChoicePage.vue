@@ -97,7 +97,7 @@ interface Profile {
 async function fetchData() {  
   try {
     // replace `getPost` with your data fetching util / API wrapper
-    const response = await axios.get('https://backend.manushe.monerbondhu.com/api/user', {
+    const response = await axios.get('https://backend-manushe.monerbondhu.com/api/user', {
             headers: { Authorization: `Bearer ${localStorage.getItem('api_token')}` },
     });
 

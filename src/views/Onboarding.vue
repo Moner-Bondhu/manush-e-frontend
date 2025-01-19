@@ -231,16 +231,16 @@
         "grade" : parent_grade.value
       };
         try {
-          const childResponse = await axios.post('https://backend.manushe.monerbondhu.com/api/profile/create', childData, {
+          const childResponse = await axios.post('https://backend-manushe.monerbondhu.com/api/profile/create', childData, {
             headers: { Authorization: `Bearer ${localStorage.getItem('api_token')}` },
           });
 
-          const parentResponse = await axios.post('https://backend.manushe.monerbondhu.com/api/profile/create', parentData, {
+          const parentResponse = await axios.post('https://backend-manushe.monerbondhu.com/api/profile/create', parentData, {
             headers: { Authorization: `Bearer ${localStorage.getItem('api_token')}` },
           });
   
           if (childResponse.data.success && parentResponse.data.success) {
-            const onboardResponse = await axios.post('https://backend.manushe.monerbondhu.com/api/user/onboard', {}, {
+            const onboardResponse = await axios.post('https://backend-manushe.monerbondhu.com/api/user/onboard', {}, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('api_token')}` },
             });
             if(onboardResponse.data.success){

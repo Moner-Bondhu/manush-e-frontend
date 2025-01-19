@@ -49,7 +49,7 @@ const handleSubmit = async () => {
         );
         if (response.data.success) {
           localStorage.setItem('api_token', response.data.data.token);
-          localStorage.setItem('user', response.data.data.user);
+          localStorage.setItem('user', JSON.stringify(response.data.data.user));
           localStorage.removeItem('phoneNumber');
           router.push('/choice');
         } else {

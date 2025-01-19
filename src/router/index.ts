@@ -49,7 +49,7 @@ router.beforeEach((to, from, next) => {
 
   // Case 1: User has API token, redirect `/login` or `/send-otp` to dashboard
   if (apiToken) {
-    if (!user?.is_onboarded) {
+    if (!user?.is_onboarded && to.path !== '/onboarding') {
       next('/onboarding'); // Redirect to onboarding if not onboarded
     } else if (to.path === '/login' || to.path === '/send-otp') {
       next('/choice'); // Redirect logged-in users to dashboard

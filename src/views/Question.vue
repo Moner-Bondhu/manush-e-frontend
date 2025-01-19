@@ -262,7 +262,7 @@
 <script setup lang="ts">
 import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonContent, IonButton } from '@ionic/vue';
 import { useRouter } from 'vue-router';
-import StarProgressBar from '@/components/ProgressBar.vue'; // Adjust the path if necessary
+// import StarProgressBar from '@/components/ProgressBar.vue'; // Adjust the path if necessary
 
 const router = useRouter();
 const navigateToBoxC = () => {

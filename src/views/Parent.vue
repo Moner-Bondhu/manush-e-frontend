@@ -3,7 +3,7 @@
         <ion-header class="">
             <ion-toolbar class="">
                 <ion-buttons slot="">
-                    <ion-back-button default-href="/main"></ion-back-button>
+                    <ion-back-button default-href="/"></ion-back-button>
                     <!-- <ion-img src="/public/mb-logo.svg" class="w-[70px] mx-auto "></ion-img> -->
                 </ion-buttons>
             </ion-toolbar>

@@ -14,9 +14,15 @@
                         </p>
                         <form @submit.prevent="handleSubmit" class="flex flex-col mt-8">
 
-
-                            <input v-model="number" type="number" placeholder="Enter your ID"
-                                class="shadow-xs w-full rounded-lg border border-stroke bg-white p-3 text-sm font-medium outline-none transition-all duration-200 focus:ring-2 focus:ring-red-500" />
+                            <div class="relative w-full">
+                                <span class="absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-500">+88</span>
+                                <input 
+                                  v-model="phoneNumber" 
+                                  type="text" 
+                                  placeholder="আপনার ফোন নাম্বার দিন (যেমন: 01534618836)" 
+                                  class="shadow-xs w-full pl-12 rounded-lg border border-stroke bg-white p-3 text-sm font-medium outline-none transition-all duration-200 focus:ring-2 focus:ring-red-500" 
+                                />
+                            </div>
                             <ion-button type="submit" expand="block" fill="outline" class="mt-4 rounded-lg">
                                 Continue
                             </ion-button>
@@ -32,16 +38,31 @@
 import { IonPage, IonContent, IonButton, IonImg, IonInput } from '@ionic/vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import axios from 'axios';
 
-const number = ref('');
+const phoneNumber = ref('');
 const router = useRouter();
 
-const handleSubmit = () => {
-    if (number.value) {
-        // Navigate to /choice
-        router.push('/choice');
+
+const handleSubmit = async () => {
+    if(!phoneNumber.value){
+        alert('Please enter a number!') // TODO: Replace with error handling
     } else {
-        alert('Please enter a number!');
+        try {
+        const response = await axios.post(
+          'https://backend.manushe.monerbondhu.com/api/login',
+          { phoneNumber: `+88${phoneNumber.value}` }
+        );
+        if (response.data.success) {
+          localStorage.setItem('phoneNumber', `+88${phoneNumber.value}`);
+          router.push('/send-otp');
+        } else {
+          alert('Failed to send phone number. Try again.'); // TODO: Replace with error handling
+        }
+      } catch (error) {
+        console.error(error);
+        alert('An error occurred.'); // TODO: Replace with error handling
+      } 
     }
 };
 </script>

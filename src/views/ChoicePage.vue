@@ -43,7 +43,7 @@
                         </div>
                         <div class="">
                             <h2 class="text-lg my-0 text-red-600 tracking-wider	font-semibold  text-center">CHILD</h2>
-                            <p class="text-xs text-center">Lorem ipsum dolor sit ame dasd ada das dsa</p>
+                            <p class="text-xs text-center" id="childName">{{ childName }}</p>
                         </div>
 
                     </div>
@@ -54,7 +54,7 @@
                         </div>
                         <div class="col-span-3 ">
                             <h2 class="text-lg my-0 text-red-600 tracking-wider	font-semibold text-center">PARENT</h2>
-                            <p class="text-xs text-center">Lorem ipsum dolor sit amet consectetur adipisinia</p>
+                            <p class="text-xs text-center" id="parentName">{{ parentName }}</p>
                         </div>
 
                     </div>
@@ -68,8 +68,57 @@
 <script setup lang="ts">
 import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonContent, IonButton } from '@ionic/vue';
 import { useRouter } from 'vue-router';
+import { ref } from 'vue';
+import axios from 'axios';
 
 const router = useRouter();
+const childName = ref('');
+const parentName = ref('');
+const user = ref({});
+
+interface Demography {
+  id: number;
+  profile_id: number;
+  dob: string;
+  gender: string;
+  grade: string;
+  created_at: string;
+  updated_at: string;
+}
+
+interface Profile {
+  id: number;
+  full_name: string;
+  type: string;
+  relation_type: string;
+  demography: Demography;
+}
+
+async function fetchData() {  
+  try {
+    // replace `getPost` with your data fetching util / API wrapper
+    const response = await axios.get('https://backend.manushe.monerbondhu.com/api/user', {
+            headers: { Authorization: `Bearer ${localStorage.getItem('api_token')}` },
+    });
+
+    // Find the child and parent profiles from the response
+    const childProfile = response.data.data.profiles.find((profile: Profile) => profile.type === 'child');
+    const parentProfile = response.data.data.profiles.find((profile: Profile) => profile.type === 'parent');
+
+
+
+    // Set the names to the corresponding variables if profiles are found
+    if (childProfile) {
+        childName.value = childProfile.full_name;
+    }
+
+    if (parentProfile) {
+        parentName.value = parentProfile.full_name;
+    }
+  } catch (err) {
+    console.log(err);
+  } 
+}
 
 const navigateToBoxA = () => {
     router.push('/boxA');
@@ -78,6 +127,9 @@ const navigateToBoxA = () => {
 const navigateToBoxB = () => {
     router.push('/boxB');
 };
+
+fetchData();
+
 </script>
 
 <style scoped>

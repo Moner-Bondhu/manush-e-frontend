@@ -37,7 +37,7 @@
                 </div> -->
 
                 <div class="flex gap-4 mt-4">
-                    <div class=" w-full shadow min-h-[150px] rounded-lg mx-auto   border p-3" @click="navigateToBoxA">
+                    <div class=" w-full shadow min-h-[150px] rounded-lg mx-auto   border p-3" @click="selectProfile('child')">
                         <div class="c items-center justify-center">
                             <ion-img src="/Children.png" class="w-[70px] mx-auto "></ion-img>
                         </div>
@@ -48,7 +48,7 @@
 
                     </div>
                     <div class=" gap-4  w-full shadow min-h-[150px] rounded-lg mx-auto  border  p-3"
-                        @click="navigateToBoxB">
+                        @click="selectProfile('parent')">
                         <div class="col-span-2 ">
                             <ion-img src="/Parents.png" class="w-[70px] mx-auto "></ion-img>
                         </div>
@@ -97,7 +97,7 @@ interface Profile {
 async function fetchData() {  
   try {
     // replace `getPost` with your data fetching util / API wrapper
-    const response = await axios.get('https://backend-manushe.monerbondhu.com/api/user', {
+    const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/user`, {
             headers: { Authorization: `Bearer ${localStorage.getItem('api_token')}` },
     });
 
@@ -120,8 +120,9 @@ async function fetchData() {
   } 
 }
 
-const navigateToBoxA = () => {
-    router.push('/boxA');
+const selectProfile = (profile: string) => {
+  // Redirect to the scale page with the selected profile as a query parameter
+  router.push({ name: 'Dashboard', query: { profile } });
 };
 
 const navigateToBoxB = () => {

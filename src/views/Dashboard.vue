@@ -34,15 +34,14 @@
                         <!-- <span class="w-3 h-3 bg-white rounded-full"></span> -->
                     </span>
                     <h2 class="text-lg mb-4 text-black">Week 1</h2>
+                    <div v-if="scales && scales.length"  class=" flex flex-col gap-2">
 
-                    <div class=" flex flex-col gap-2">
-
-                        <div class="w-full p-3 border border-gray-200 rounded-lg shadow bg-blue-100"
-                            @click="navigateToBoxC">
+                        <div v-for="(scale, id) in scales" :key="id" class="w-full p-3 border border-gray-200 rounded-lg shadow bg-blue-100"
+                            @click="startScale">
                             <div class="flex items-center">
                                 <div class="flex items-center gap-1">
                                     <ion-img src="/sleep.svg" class="w-4 "></ion-img>
-                                    <h2 class="text-lg my-0 text-black">Sleep</h2>
+                                    <h2 class="text-lg my-0 text-black">{{ scale.name }}</h2>
                                 </div>
                                 <p class="ml-auto text-xs text-gray-800 w-fit bg-green-300 px-2 py-1 rounded-lg">
                                     Completed
@@ -51,7 +50,7 @@
 
 
                             <p class="text-sm text-gray-800 py-2">
-                                Measure your child's mental wellbeing using the RCADS-25 questionnaire
+                                {{ scale.description }}
                             </p>
                             <p class=" text-xs text-gray-800 w-fit bg-white px-2 py-1 rounded-lg">
                                 3 min
@@ -59,7 +58,7 @@
 
                             <!-- <button class="bg-black text-white w-full px-8 mt-4 py-2 rounded-2xl">Unlock</button> -->
                         </div>
-                        <div class="w-full p-3 border border-gray-200 rounded-lg shadow bg-red-100">
+                        <!-- <div class="w-full p-3 border border-gray-200 rounded-lg shadow bg-red-100">
                             <div class="flex items-center">
                                 <div class="flex items-center gap-1">
                                     <ion-img src="/sleep.svg" class="w-4 "></ion-img>
@@ -74,17 +73,13 @@
                             <p class="text-sm text-gray-800 py-2">
                                 Measure your child's mental wellbeing using the RCADS-25 questionnaire
                             </p>
-                            <!-- <p class=" text-xs text-gray-800 w-fit bg-white px-2 mt-4 py-1 rounded-lg">
-                                3 min
-                            </p> -->
 
                             <button class="bg-black text-white w-full px-8 mt-4 py-2 rounded-2xl">Unlock</button>
-                        </div>
+                        </div> -->
 
                     </div>
-
                 </li>
-                <li class="mb-10 ms-6">
+                <!-- <li class="mb-10 ms-6">
                     <span
                         class="absolute flex items-center justify-center w-6 h-6 bg-gray-100 rounded-full -start-4 ring-4 ring-white">
                         <svg fill="#000000" height="8px" width="8px" version="1.1" id="XMLID_287_"
@@ -124,7 +119,7 @@
                         </div>
 
                     </div>
-                </li>
+                </li> -->
 
                 <!-- <li class="ms-6">
                     <span
@@ -149,9 +144,35 @@
 <script setup lang="ts">
 import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonContent, IonButton } from '@ionic/vue';
 import { useRouter } from 'vue-router';
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
 
 const router = useRouter();
-const navigateToBoxC = () => {
+
+const scales = ref<any>(null);
+const selectedProfile = ref('');
+
+onMounted(() => {
+    if (typeof router.currentRoute.value.query.profile === 'string') {
+        selectedProfile.value = router.currentRoute.value.query.profile;
+        fetchProfileData(selectedProfile.value);
+    } else {
+        console.log("Something went wrong");
+    }
+});
+
+const fetchProfileData = async (profile: string) => {
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/scales/${profile}`, 
+            {headers: { Authorization: `Bearer ${localStorage.getItem('api_token')}` },
+        });
+    scales.value = response.data.data;
+  } catch (error) {
+    console.error('Error fetching profile data:', error);
+  }
+};
+
+const startScale = () => {
     router.push('/quizA');
 };
 </script>

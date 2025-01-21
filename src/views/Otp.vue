@@ -44,7 +44,7 @@ const handleSubmit = async () => {
     } else {
         try {
         const response = await axios.post(
-          'https://backend-manushe.monerbondhu.com/api/otp',
+          `${import.meta.env.VITE_API_ENDPOINT}/otp`,
           { phoneNumber: phoneNumber, otp: otp.value }
         );
         if (response.data.success) {

@@ -45,12 +45,13 @@ const router = useRouter();
 
 
 const handleSubmit = async () => {
+    console.log(import.meta.env);
     if(!phoneNumber.value){
         alert('Please enter a number!') // TODO: Replace with error handling
     } else {
         try {
         const response = await axios.post(
-          'https://backend-manushe.monerbondhu.com/api/login',
+          `${import.meta.env.VITE_API_ENDPOINT}/login`,
           { phoneNumber: `+88${phoneNumber.value}` }
         );
         if (response.data.success) {

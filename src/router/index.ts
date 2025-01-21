@@ -23,8 +23,9 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/ChoicePage.vue') // Page with Box A and Box B
   },
   {
-    path: '/boxA',
-    component: () => import('@/views/Child.vue') // Page for Box A
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: () => import('@/views/Dashboard.vue') // Page for Box A
   },
   {
     path: '/boxB',

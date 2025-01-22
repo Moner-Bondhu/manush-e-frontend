@@ -26,6 +26,14 @@
                                 Continue
                             </ion-button>
                         </form>
+                        <ion-button 
+                            v-if="deferredPrompt" 
+                            @click="installPWA" 
+                            expand="block" 
+                            fill="solid" 
+                            class="mt-4 rounded-lg">
+                            Install App
+                        </ion-button>
                     </div>
                 </div>
             </section>
@@ -35,12 +43,13 @@
 
 <script setup lang="ts">
 import { IonPage, IonContent, IonButton, IonImg, IonInput } from '@ionic/vue';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 
 const phoneNumber = ref('');
 const router = useRouter();
+const deferredPrompt = ref<any>(null);
 
 
 const handleSubmit = async () => {
@@ -65,6 +74,29 @@ const handleSubmit = async () => {
       } 
     }
 };
+
+const installPWA = () => {
+    if (deferredPrompt.value) {
+        deferredPrompt.value.prompt(); // Show the install prompt
+        deferredPrompt.value.userChoice.then((choiceResult: any) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted the PWA installation.');
+            } else {
+                console.log('User dismissed the PWA installation.');
+            }
+            deferredPrompt.value = null; // Reset the prompt after user interaction
+        });
+    }
+};
+
+// Listen for the 'beforeinstallprompt' event
+onMounted(() => {
+    window.addEventListener('beforeinstallprompt', (e: any) => {
+        e.preventDefault(); // Prevent the default install prompt
+        deferredPrompt.value = e; // Save the event for later use
+    });
+});
+
 </script>
 
 <style scoped>

@@ -1,13 +1,5 @@
 <template>
     <ion-page>
-        <ion-header class="">
-            <ion-toolbar class="">
-                <ion-buttons slot="">
-                    <ion-back-button default-href="/main"></ion-back-button>
-                    <!-- <ion-img src="/public/mb-logo.svg" class="w-[70px] mx-auto "></ion-img> -->
-                </ion-buttons>
-            </ion-toolbar>
-        </ion-header>
         <ion-content :fullscreen="true">
             <section class="flex flex-col  h-full p-3">
                 <h2 class="text-xl text-center mb-8">Who is using <span class="text-red-600">Manush-E</span>?</h2>

@@ -2,10 +2,12 @@
     <ion-page>
         <ion-header class="">
             <ion-toolbar class="">
-                <ion-buttons slot="">
-                    <ion-back-button default-href="/main"></ion-back-button>
-                    <!-- <ion-img src="/public/mb-logo.svg" class="w-[70px] mx-auto "></ion-img> -->
-                </ion-buttons>
+                <ion-buttons slot="start">
+                    <ion-button router-link="/choice" fill="solid">
+                        <ion-icon slot="start"></ion-icon>
+                        Profiles
+                    </ion-button>
+                    </ion-buttons>
             </ion-toolbar>
         </ion-header>
         <ion-content :fullscreen="true" class="ion-padding">
@@ -33,18 +35,21 @@
                         </svg>
                         <!-- <span class="w-3 h-3 bg-white rounded-full"></span> -->
                     </span>
-                    <h2 class="text-lg mb-4 text-black">Week 1</h2>
+                    <h2 class="text-lg mb-4 text-black">কাজ</h2>
                     <div v-if="scales && scales.length"  class=" flex flex-col gap-2">
 
                         <div v-for="(scale, id) in scales" :key="id" class="w-full p-3 border border-gray-200 rounded-lg shadow bg-blue-100"
-                            @click="startScale">
+                        v-bind:class="{ 'bg-red-100' : scale.status === 'incomplete'}" @click="scale.status === 'incomplete' ? startScale(scale.id) : ''">
                             <div class="flex items-center">
                                 <div class="flex items-center gap-1">
                                     <ion-img src="/sleep.svg" class="w-4 "></ion-img>
                                     <h2 class="text-lg my-0 text-black">{{ scale.name }}</h2>
                                 </div>
-                                <p class="ml-auto text-xs text-gray-800 w-fit bg-green-300 px-2 py-1 rounded-lg">
-                                    Completed
+                                <p v-if="scale.status === 'complete'" class="ml-auto text-xs text-gray-800 w-fit bg-green-300 px-2 py-1 rounded-lg">
+                                    শেষ
+                                </p>
+                                <p v-if="scale.status === 'incomplete'" class="ml-auto text-xs text-gray-800 w-fit bg-red-300 px-2 py-1 rounded-lg">
+                                    করা হয় নি
                                 </p>
                             </div>
 
@@ -52,9 +57,9 @@
                             <p class="text-sm text-gray-800 py-2">
                                 {{ scale.description }}
                             </p>
-                            <p class=" text-xs text-gray-800 w-fit bg-white px-2 py-1 rounded-lg">
+                            <!-- <p class=" text-xs text-gray-800 w-fit bg-white px-2 py-1 rounded-lg">
                                 3 min
-                            </p>
+                            </p> -->
 
                             <!-- <button class="bg-black text-white w-full px-8 mt-4 py-2 rounded-2xl">Unlock</button> -->
                         </div>
@@ -143,14 +148,15 @@
 
 <script setup lang="ts">
 import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonContent, IonButton } from '@ionic/vue';
-import { useRouter } from 'vue-router';
-import { ref, onMounted } from 'vue';
+import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router';
+import { ref, onMounted, watch } from 'vue';
 import axios from 'axios';
 
-const router = useRouter();
+let router = useRouter();
+let route = useRoute();
 
-const scales = ref<any>(null);
-const selectedProfile = ref('');
+let scales = ref<any>(null);
+let selectedProfile = ref('');
 
 onMounted(() => {
     if (typeof router.currentRoute.value.query.profile === 'string') {
@@ -160,6 +166,17 @@ onMounted(() => {
         console.log("Something went wrong");
     }
 });
+
+// Watch for changes in the route query parameter 'profile'
+watch(
+      () => route.query.profile, // Watch the profile query parameter
+      (newProfile, oldProfile) => {
+        if (newProfile !== oldProfile) {
+          // Profile has changed, so refetch the data
+          fetchProfileData(newProfile);
+        }
+      }
+    );
 
 const fetchProfileData = async (profile: string) => {
   try {
@@ -172,8 +189,8 @@ const fetchProfileData = async (profile: string) => {
   }
 };
 
-const startScale = () => {
-    router.push('/quizA');
+const startScale = (id: number) => {
+    router.push({ name: 'Questions', params: { id: id } });
 };
 </script>
 

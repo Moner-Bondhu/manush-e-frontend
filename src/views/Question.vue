@@ -3,13 +3,13 @@
         <ion-header class="">
             <ion-toolbar class="">
                 <ion-buttons slot="">
-                    <ion-back-button default-href="/main"></ion-back-button>
+                    <ion-back-button default-href="/"></ion-back-button>
                     <!-- <ion-img src="/public/mb-logo.svg" class="w-[70px] mx-auto "></ion-img> -->
                 </ion-buttons>
             </ion-toolbar>
         </ion-header>
         <ion-content :fullscreen="true" class="ion-padding bg-red-100">
-            <h3 class="my-0 text-xl text-center mb-8">Mental Wellbeing Quiz</h3>
+            <h3 v-if="scale" class="my-0 text-xl text-center mb-8">{{ scale.name }}</h3>
             <!-- <div class="bg-gray-100 p-5 rounded-xl">
                 <div class="flex justify-between">
                     <p class="text-xs font-semibold">01 Question</p>
@@ -35,223 +35,82 @@
             <div class="w-full  rounded-full h-2.5 ">
                 <div class="bg-red-600 h-1 " style="width: 45%"></div>
             </div>
-            <p class="text-xs mb-8">3 of 9 Questions</p>
+            <p v-if="scale" class="text-xs mb-8">{{ currentQuestionIndex + 1 }} of {{ scale.questions.length }} Questions</p>
 
-            <ul class="flex items-center justify-between">
-                <li>
-                    <svg width="24px" height="24px" viewBox="-2.4 -2.4 28.80 28.80" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0">
-                            <rect x="-2.4" y="-2.4" width="28.80" height="28.80" rx="14.4" fill="#008000"
-                                strokewidth="0">
-                            </rect>
-                        </g>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                        <g id="SVGRepo_iconCarrier">
-                            <path
-                                d="M11.2691 4.41115C11.5006 3.89177 11.6164 3.63208 11.7776 3.55211C11.9176 3.48263 12.082 3.48263 12.222 3.55211C12.3832 3.63208 12.499 3.89177 12.7305 4.41115L14.5745 8.54808C14.643 8.70162 14.6772 8.77839 14.7302 8.83718C14.777 8.8892 14.8343 8.93081 14.8982 8.95929C14.9705 8.99149 15.0541 9.00031 15.2213 9.01795L19.7256 9.49336C20.2911 9.55304 20.5738 9.58288 20.6997 9.71147C20.809 9.82316 20.8598 9.97956 20.837 10.1342C20.8108 10.3122 20.5996 10.5025 20.1772 10.8832L16.8125 13.9154C16.6877 14.0279 16.6252 14.0842 16.5857 14.1527C16.5507 14.2134 16.5288 14.2807 16.5215 14.3503C16.5132 14.429 16.5306 14.5112 16.5655 14.6757L17.5053 19.1064C17.6233 19.6627 17.6823 19.9408 17.5989 20.1002C17.5264 20.2388 17.3934 20.3354 17.2393 20.3615C17.0619 20.3915 16.8156 20.2495 16.323 19.9654L12.3995 17.7024C12.2539 17.6184 12.1811 17.5765 12.1037 17.56C12.0352 17.5455 11.9644 17.5455 11.8959 17.56C11.8185 17.5765 11.7457 17.6184 11.6001 17.7024L7.67662 19.9654C7.18404 20.2495 6.93775 20.3915 6.76034 20.3615C6.60623 20.3354 6.47319 20.2388 6.40075 20.1002C6.31736 19.9408 6.37635 19.6627 6.49434 19.1064L7.4341 14.6757C7.46898 14.5112 7.48642 14.429 7.47814 14.3503C7.47081 14.2807 7.44894 14.2134 7.41394 14.1527C7.37439 14.0842 7.31195 14.0279 7.18708 13.9154L3.82246 10.8832C3.40005 10.5025 3.18884 10.3122 3.16258 10.1342C3.13978 9.97956 3.19059 9.82316 3.29993 9.71147C3.42581 9.58288 3.70856 9.55304 4.27406 9.49336L8.77835 9.01795C8.94553 9.00031 9.02911 8.99149 9.10139 8.95929C9.16534 8.93081 9.2226 8.8892 9.26946 8.83718C9.32241 8.77839 9.35663 8.70162 9.42508 8.54808L11.2691 4.41115Z"
-                                stroke="#008000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </g>
-                    </svg>
-                </li>
-                <div class="h-1 bg-gray-200 w-full "></div>
-                <li>
-                    <svg width="24px" height="24px" viewBox="-2.4 -2.4 28.80 28.80" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0">
-                            <rect x="-2.4" y="-2.4" width="28.80" height="28.80" rx="14.4" fill="#eee" strokewidth="0">
-                            </rect>
-                        </g>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                        <g id="SVGRepo_iconCarrier">
-                            <path
-                                d="M11.2691 4.41115C11.5006 3.89177 11.6164 3.63208 11.7776 3.55211C11.9176 3.48263 12.082 3.48263 12.222 3.55211C12.3832 3.63208 12.499 3.89177 12.7305 4.41115L14.5745 8.54808C14.643 8.70162 14.6772 8.77839 14.7302 8.83718C14.777 8.8892 14.8343 8.93081 14.8982 8.95929C14.9705 8.99149 15.0541 9.00031 15.2213 9.01795L19.7256 9.49336C20.2911 9.55304 20.5738 9.58288 20.6997 9.71147C20.809 9.82316 20.8598 9.97956 20.837 10.1342C20.8108 10.3122 20.5996 10.5025 20.1772 10.8832L16.8125 13.9154C16.6877 14.0279 16.6252 14.0842 16.5857 14.1527C16.5507 14.2134 16.5288 14.2807 16.5215 14.3503C16.5132 14.429 16.5306 14.5112 16.5655 14.6757L17.5053 19.1064C17.6233 19.6627 17.6823 19.9408 17.5989 20.1002C17.5264 20.2388 17.3934 20.3354 17.2393 20.3615C17.0619 20.3915 16.8156 20.2495 16.323 19.9654L12.3995 17.7024C12.2539 17.6184 12.1811 17.5765 12.1037 17.56C12.0352 17.5455 11.9644 17.5455 11.8959 17.56C11.8185 17.5765 11.7457 17.6184 11.6001 17.7024L7.67662 19.9654C7.18404 20.2495 6.93775 20.3915 6.76034 20.3615C6.60623 20.3354 6.47319 20.2388 6.40075 20.1002C6.31736 19.9408 6.37635 19.6627 6.49434 19.1064L7.4341 14.6757C7.46898 14.5112 7.48642 14.429 7.47814 14.3503C7.47081 14.2807 7.44894 14.2134 7.41394 14.1527C7.37439 14.0842 7.31195 14.0279 7.18708 13.9154L3.82246 10.8832C3.40005 10.5025 3.18884 10.3122 3.16258 10.1342C3.13978 9.97956 3.19059 9.82316 3.29993 9.71147C3.42581 9.58288 3.70856 9.55304 4.27406 9.49336L8.77835 9.01795C8.94553 9.00031 9.02911 8.99149 9.10139 8.95929C9.16534 8.93081 9.2226 8.8892 9.26946 8.83718C9.32241 8.77839 9.35663 8.70162 9.42508 8.54808L11.2691 4.41115Z"
-                                stroke="#ce2327" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </g>
-                    </svg>
-                </li>
-                <div class="h-1 bg-gray-200 w-full "></div>
+            <ProgressBar v-if="scale" :number="currentQuestionIndex + 1" :maxStars="scale.questions.length" />
 
-                <li>
-                    <svg width="20px" height="20px" viewBox="-2.4 -2.4 28.80 28.80" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0">
-                            <rect x="-2.4" y="-2.4" width="28.80" height="28.80" rx="14.4" fill="#eee" strokewidth="0">
-                            </rect>
-                        </g>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                        <g id="SVGRepo_iconCarrier">
-                            <path
-                                d="M11.2691 4.41115C11.5006 3.89177 11.6164 3.63208 11.7776 3.55211C11.9176 3.48263 12.082 3.48263 12.222 3.55211C12.3832 3.63208 12.499 3.89177 12.7305 4.41115L14.5745 8.54808C14.643 8.70162 14.6772 8.77839 14.7302 8.83718C14.777 8.8892 14.8343 8.93081 14.8982 8.95929C14.9705 8.99149 15.0541 9.00031 15.2213 9.01795L19.7256 9.49336C20.2911 9.55304 20.5738 9.58288 20.6997 9.71147C20.809 9.82316 20.8598 9.97956 20.837 10.1342C20.8108 10.3122 20.5996 10.5025 20.1772 10.8832L16.8125 13.9154C16.6877 14.0279 16.6252 14.0842 16.5857 14.1527C16.5507 14.2134 16.5288 14.2807 16.5215 14.3503C16.5132 14.429 16.5306 14.5112 16.5655 14.6757L17.5053 19.1064C17.6233 19.6627 17.6823 19.9408 17.5989 20.1002C17.5264 20.2388 17.3934 20.3354 17.2393 20.3615C17.0619 20.3915 16.8156 20.2495 16.323 19.9654L12.3995 17.7024C12.2539 17.6184 12.1811 17.5765 12.1037 17.56C12.0352 17.5455 11.9644 17.5455 11.8959 17.56C11.8185 17.5765 11.7457 17.6184 11.6001 17.7024L7.67662 19.9654C7.18404 20.2495 6.93775 20.3915 6.76034 20.3615C6.60623 20.3354 6.47319 20.2388 6.40075 20.1002C6.31736 19.9408 6.37635 19.6627 6.49434 19.1064L7.4341 14.6757C7.46898 14.5112 7.48642 14.429 7.47814 14.3503C7.47081 14.2807 7.44894 14.2134 7.41394 14.1527C7.37439 14.0842 7.31195 14.0279 7.18708 13.9154L3.82246 10.8832C3.40005 10.5025 3.18884 10.3122 3.16258 10.1342C3.13978 9.97956 3.19059 9.82316 3.29993 9.71147C3.42581 9.58288 3.70856 9.55304 4.27406 9.49336L8.77835 9.01795C8.94553 9.00031 9.02911 8.99149 9.10139 8.95929C9.16534 8.93081 9.2226 8.8892 9.26946 8.83718C9.32241 8.77839 9.35663 8.70162 9.42508 8.54808L11.2691 4.41115Z"
-                                stroke="#ce2327" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </g>
-                    </svg>
-                </li>
-                <div class="h-1 bg-gray-200 w-full 2"></div>
-
-                <li>
-                    <svg width="20px" height="20px" viewBox="-2.4 -2.4 28.80 28.80" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0">
-                            <rect x="-2.4" y="-2.4" width="28.80" height="28.80" rx="14.4" fill="#eee" strokewidth="0">
-                            </rect>
-                        </g>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                        <g id="SVGRepo_iconCarrier">
-                            <path
-                                d="M11.2691 4.41115C11.5006 3.89177 11.6164 3.63208 11.7776 3.55211C11.9176 3.48263 12.082 3.48263 12.222 3.55211C12.3832 3.63208 12.499 3.89177 12.7305 4.41115L14.5745 8.54808C14.643 8.70162 14.6772 8.77839 14.7302 8.83718C14.777 8.8892 14.8343 8.93081 14.8982 8.95929C14.9705 8.99149 15.0541 9.00031 15.2213 9.01795L19.7256 9.49336C20.2911 9.55304 20.5738 9.58288 20.6997 9.71147C20.809 9.82316 20.8598 9.97956 20.837 10.1342C20.8108 10.3122 20.5996 10.5025 20.1772 10.8832L16.8125 13.9154C16.6877 14.0279 16.6252 14.0842 16.5857 14.1527C16.5507 14.2134 16.5288 14.2807 16.5215 14.3503C16.5132 14.429 16.5306 14.5112 16.5655 14.6757L17.5053 19.1064C17.6233 19.6627 17.6823 19.9408 17.5989 20.1002C17.5264 20.2388 17.3934 20.3354 17.2393 20.3615C17.0619 20.3915 16.8156 20.2495 16.323 19.9654L12.3995 17.7024C12.2539 17.6184 12.1811 17.5765 12.1037 17.56C12.0352 17.5455 11.9644 17.5455 11.8959 17.56C11.8185 17.5765 11.7457 17.6184 11.6001 17.7024L7.67662 19.9654C7.18404 20.2495 6.93775 20.3915 6.76034 20.3615C6.60623 20.3354 6.47319 20.2388 6.40075 20.1002C6.31736 19.9408 6.37635 19.6627 6.49434 19.1064L7.4341 14.6757C7.46898 14.5112 7.48642 14.429 7.47814 14.3503C7.47081 14.2807 7.44894 14.2134 7.41394 14.1527C7.37439 14.0842 7.31195 14.0279 7.18708 13.9154L3.82246 10.8832C3.40005 10.5025 3.18884 10.3122 3.16258 10.1342C3.13978 9.97956 3.19059 9.82316 3.29993 9.71147C3.42581 9.58288 3.70856 9.55304 4.27406 9.49336L8.77835 9.01795C8.94553 9.00031 9.02911 8.99149 9.10139 8.95929C9.16534 8.93081 9.2226 8.8892 9.26946 8.83718C9.32241 8.77839 9.35663 8.70162 9.42508 8.54808L11.2691 4.41115Z"
-                                stroke="#ce2327" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </g>
-                    </svg>
-                </li>
-                <div class="h-1 bg-gray-200 w-full 2"></div>
-
-                <li>
-                    <svg width="20px" height="20px" viewBox="-2.4 -2.4 28.80 28.80" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0">
-                            <rect x="-2.4" y="-2.4" width="28.80" height="28.80" rx="14.4" fill="#eee" strokewidth="0">
-                            </rect>
-                        </g>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                        <g id="SVGRepo_iconCarrier">
-                            <path
-                                d="M11.2691 4.41115C11.5006 3.89177 11.6164 3.63208 11.7776 3.55211C11.9176 3.48263 12.082 3.48263 12.222 3.55211C12.3832 3.63208 12.499 3.89177 12.7305 4.41115L14.5745 8.54808C14.643 8.70162 14.6772 8.77839 14.7302 8.83718C14.777 8.8892 14.8343 8.93081 14.8982 8.95929C14.9705 8.99149 15.0541 9.00031 15.2213 9.01795L19.7256 9.49336C20.2911 9.55304 20.5738 9.58288 20.6997 9.71147C20.809 9.82316 20.8598 9.97956 20.837 10.1342C20.8108 10.3122 20.5996 10.5025 20.1772 10.8832L16.8125 13.9154C16.6877 14.0279 16.6252 14.0842 16.5857 14.1527C16.5507 14.2134 16.5288 14.2807 16.5215 14.3503C16.5132 14.429 16.5306 14.5112 16.5655 14.6757L17.5053 19.1064C17.6233 19.6627 17.6823 19.9408 17.5989 20.1002C17.5264 20.2388 17.3934 20.3354 17.2393 20.3615C17.0619 20.3915 16.8156 20.2495 16.323 19.9654L12.3995 17.7024C12.2539 17.6184 12.1811 17.5765 12.1037 17.56C12.0352 17.5455 11.9644 17.5455 11.8959 17.56C11.8185 17.5765 11.7457 17.6184 11.6001 17.7024L7.67662 19.9654C7.18404 20.2495 6.93775 20.3915 6.76034 20.3615C6.60623 20.3354 6.47319 20.2388 6.40075 20.1002C6.31736 19.9408 6.37635 19.6627 6.49434 19.1064L7.4341 14.6757C7.46898 14.5112 7.48642 14.429 7.47814 14.3503C7.47081 14.2807 7.44894 14.2134 7.41394 14.1527C7.37439 14.0842 7.31195 14.0279 7.18708 13.9154L3.82246 10.8832C3.40005 10.5025 3.18884 10.3122 3.16258 10.1342C3.13978 9.97956 3.19059 9.82316 3.29993 9.71147C3.42581 9.58288 3.70856 9.55304 4.27406 9.49336L8.77835 9.01795C8.94553 9.00031 9.02911 8.99149 9.10139 8.95929C9.16534 8.93081 9.2226 8.8892 9.26946 8.83718C9.32241 8.77839 9.35663 8.70162 9.42508 8.54808L11.2691 4.41115Z"
-                                stroke="#ce2327" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </g>
-                    </svg>
-                </li>
-                <div class="h-1 bg-gray-200 w-full 2"></div>
-
-                <li>
-                    <svg width="20px" height="20px" viewBox="-2.4 -2.4 28.80 28.80" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0">
-                            <rect x="-2.4" y="-2.4" width="28.80" height="28.80" rx="14.4" fill="#eee" strokewidth="0">
-                            </rect>
-                        </g>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                        <g id="SVGRepo_iconCarrier">
-                            <path
-                                d="M11.2691 4.41115C11.5006 3.89177 11.6164 3.63208 11.7776 3.55211C11.9176 3.48263 12.082 3.48263 12.222 3.55211C12.3832 3.63208 12.499 3.89177 12.7305 4.41115L14.5745 8.54808C14.643 8.70162 14.6772 8.77839 14.7302 8.83718C14.777 8.8892 14.8343 8.93081 14.8982 8.95929C14.9705 8.99149 15.0541 9.00031 15.2213 9.01795L19.7256 9.49336C20.2911 9.55304 20.5738 9.58288 20.6997 9.71147C20.809 9.82316 20.8598 9.97956 20.837 10.1342C20.8108 10.3122 20.5996 10.5025 20.1772 10.8832L16.8125 13.9154C16.6877 14.0279 16.6252 14.0842 16.5857 14.1527C16.5507 14.2134 16.5288 14.2807 16.5215 14.3503C16.5132 14.429 16.5306 14.5112 16.5655 14.6757L17.5053 19.1064C17.6233 19.6627 17.6823 19.9408 17.5989 20.1002C17.5264 20.2388 17.3934 20.3354 17.2393 20.3615C17.0619 20.3915 16.8156 20.2495 16.323 19.9654L12.3995 17.7024C12.2539 17.6184 12.1811 17.5765 12.1037 17.56C12.0352 17.5455 11.9644 17.5455 11.8959 17.56C11.8185 17.5765 11.7457 17.6184 11.6001 17.7024L7.67662 19.9654C7.18404 20.2495 6.93775 20.3915 6.76034 20.3615C6.60623 20.3354 6.47319 20.2388 6.40075 20.1002C6.31736 19.9408 6.37635 19.6627 6.49434 19.1064L7.4341 14.6757C7.46898 14.5112 7.48642 14.429 7.47814 14.3503C7.47081 14.2807 7.44894 14.2134 7.41394 14.1527C7.37439 14.0842 7.31195 14.0279 7.18708 13.9154L3.82246 10.8832C3.40005 10.5025 3.18884 10.3122 3.16258 10.1342C3.13978 9.97956 3.19059 9.82316 3.29993 9.71147C3.42581 9.58288 3.70856 9.55304 4.27406 9.49336L8.77835 9.01795C8.94553 9.00031 9.02911 8.99149 9.10139 8.95929C9.16534 8.93081 9.2226 8.8892 9.26946 8.83718C9.32241 8.77839 9.35663 8.70162 9.42508 8.54808L11.2691 4.41115Z"
-                                stroke="#ce2327" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </g>
-                    </svg>
-                </li>
-                <div class="h-1 bg-gray-200 w-full 2"></div>
-
-                <li>
-                    <svg width="20px" height="20px" viewBox="-2.4 -2.4 28.80 28.80" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0">
-                            <rect x="-2.4" y="-2.4" width="28.80" height="28.80" rx="14.4" fill="#eee" strokewidth="0">
-                            </rect>
-                        </g>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                        <g id="SVGRepo_iconCarrier">
-                            <path
-                                d="M11.2691 4.41115C11.5006 3.89177 11.6164 3.63208 11.7776 3.55211C11.9176 3.48263 12.082 3.48263 12.222 3.55211C12.3832 3.63208 12.499 3.89177 12.7305 4.41115L14.5745 8.54808C14.643 8.70162 14.6772 8.77839 14.7302 8.83718C14.777 8.8892 14.8343 8.93081 14.8982 8.95929C14.9705 8.99149 15.0541 9.00031 15.2213 9.01795L19.7256 9.49336C20.2911 9.55304 20.5738 9.58288 20.6997 9.71147C20.809 9.82316 20.8598 9.97956 20.837 10.1342C20.8108 10.3122 20.5996 10.5025 20.1772 10.8832L16.8125 13.9154C16.6877 14.0279 16.6252 14.0842 16.5857 14.1527C16.5507 14.2134 16.5288 14.2807 16.5215 14.3503C16.5132 14.429 16.5306 14.5112 16.5655 14.6757L17.5053 19.1064C17.6233 19.6627 17.6823 19.9408 17.5989 20.1002C17.5264 20.2388 17.3934 20.3354 17.2393 20.3615C17.0619 20.3915 16.8156 20.2495 16.323 19.9654L12.3995 17.7024C12.2539 17.6184 12.1811 17.5765 12.1037 17.56C12.0352 17.5455 11.9644 17.5455 11.8959 17.56C11.8185 17.5765 11.7457 17.6184 11.6001 17.7024L7.67662 19.9654C7.18404 20.2495 6.93775 20.3915 6.76034 20.3615C6.60623 20.3354 6.47319 20.2388 6.40075 20.1002C6.31736 19.9408 6.37635 19.6627 6.49434 19.1064L7.4341 14.6757C7.46898 14.5112 7.48642 14.429 7.47814 14.3503C7.47081 14.2807 7.44894 14.2134 7.41394 14.1527C7.37439 14.0842 7.31195 14.0279 7.18708 13.9154L3.82246 10.8832C3.40005 10.5025 3.18884 10.3122 3.16258 10.1342C3.13978 9.97956 3.19059 9.82316 3.29993 9.71147C3.42581 9.58288 3.70856 9.55304 4.27406 9.49336L8.77835 9.01795C8.94553 9.00031 9.02911 8.99149 9.10139 8.95929C9.16534 8.93081 9.2226 8.8892 9.26946 8.83718C9.32241 8.77839 9.35663 8.70162 9.42508 8.54808L11.2691 4.41115Z"
-                                stroke="#ce2327" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </g>
-                    </svg>
-                </li>
-                <div class="h-1 bg-gray-200 w-full 2"></div>
-
-                <li>
-                    <svg width="20px" height="20px" viewBox="-2.4 -2.4 28.80 28.80" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0">
-                            <rect x="-2.4" y="-2.4" width="28.80" height="28.80" rx="14.4" fill="#eee" strokewidth="0">
-                            </rect>
-                        </g>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                        <g id="SVGRepo_iconCarrier">
-                            <path
-                                d="M11.2691 4.41115C11.5006 3.89177 11.6164 3.63208 11.7776 3.55211C11.9176 3.48263 12.082 3.48263 12.222 3.55211C12.3832 3.63208 12.499 3.89177 12.7305 4.41115L14.5745 8.54808C14.643 8.70162 14.6772 8.77839 14.7302 8.83718C14.777 8.8892 14.8343 8.93081 14.8982 8.95929C14.9705 8.99149 15.0541 9.00031 15.2213 9.01795L19.7256 9.49336C20.2911 9.55304 20.5738 9.58288 20.6997 9.71147C20.809 9.82316 20.8598 9.97956 20.837 10.1342C20.8108 10.3122 20.5996 10.5025 20.1772 10.8832L16.8125 13.9154C16.6877 14.0279 16.6252 14.0842 16.5857 14.1527C16.5507 14.2134 16.5288 14.2807 16.5215 14.3503C16.5132 14.429 16.5306 14.5112 16.5655 14.6757L17.5053 19.1064C17.6233 19.6627 17.6823 19.9408 17.5989 20.1002C17.5264 20.2388 17.3934 20.3354 17.2393 20.3615C17.0619 20.3915 16.8156 20.2495 16.323 19.9654L12.3995 17.7024C12.2539 17.6184 12.1811 17.5765 12.1037 17.56C12.0352 17.5455 11.9644 17.5455 11.8959 17.56C11.8185 17.5765 11.7457 17.6184 11.6001 17.7024L7.67662 19.9654C7.18404 20.2495 6.93775 20.3915 6.76034 20.3615C6.60623 20.3354 6.47319 20.2388 6.40075 20.1002C6.31736 19.9408 6.37635 19.6627 6.49434 19.1064L7.4341 14.6757C7.46898 14.5112 7.48642 14.429 7.47814 14.3503C7.47081 14.2807 7.44894 14.2134 7.41394 14.1527C7.37439 14.0842 7.31195 14.0279 7.18708 13.9154L3.82246 10.8832C3.40005 10.5025 3.18884 10.3122 3.16258 10.1342C3.13978 9.97956 3.19059 9.82316 3.29993 9.71147C3.42581 9.58288 3.70856 9.55304 4.27406 9.49336L8.77835 9.01795C8.94553 9.00031 9.02911 8.99149 9.10139 8.95929C9.16534 8.93081 9.2226 8.8892 9.26946 8.83718C9.32241 8.77839 9.35663 8.70162 9.42508 8.54808L11.2691 4.41115Z"
-                                stroke="#ce2327" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </g>
-                    </svg>
-                </li>
-                <div class="h-1 bg-gray-200 w-full 2"></div>
-
-                <li>
-                    <svg width="20px" height="20px" viewBox="-2.4 -2.4 28.80 28.80" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0">
-                            <rect x="-2.4" y="-2.4" width="28.80" height="28.80" rx="14.4" fill="#eee" strokewidth="0">
-                            </rect>
-                        </g>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                        <g id="SVGRepo_iconCarrier">
-                            <path
-                                d="M11.2691 4.41115C11.5006 3.89177 11.6164 3.63208 11.7776 3.55211C11.9176 3.48263 12.082 3.48263 12.222 3.55211C12.3832 3.63208 12.499 3.89177 12.7305 4.41115L14.5745 8.54808C14.643 8.70162 14.6772 8.77839 14.7302 8.83718C14.777 8.8892 14.8343 8.93081 14.8982 8.95929C14.9705 8.99149 15.0541 9.00031 15.2213 9.01795L19.7256 9.49336C20.2911 9.55304 20.5738 9.58288 20.6997 9.71147C20.809 9.82316 20.8598 9.97956 20.837 10.1342C20.8108 10.3122 20.5996 10.5025 20.1772 10.8832L16.8125 13.9154C16.6877 14.0279 16.6252 14.0842 16.5857 14.1527C16.5507 14.2134 16.5288 14.2807 16.5215 14.3503C16.5132 14.429 16.5306 14.5112 16.5655 14.6757L17.5053 19.1064C17.6233 19.6627 17.6823 19.9408 17.5989 20.1002C17.5264 20.2388 17.3934 20.3354 17.2393 20.3615C17.0619 20.3915 16.8156 20.2495 16.323 19.9654L12.3995 17.7024C12.2539 17.6184 12.1811 17.5765 12.1037 17.56C12.0352 17.5455 11.9644 17.5455 11.8959 17.56C11.8185 17.5765 11.7457 17.6184 11.6001 17.7024L7.67662 19.9654C7.18404 20.2495 6.93775 20.3915 6.76034 20.3615C6.60623 20.3354 6.47319 20.2388 6.40075 20.1002C6.31736 19.9408 6.37635 19.6627 6.49434 19.1064L7.4341 14.6757C7.46898 14.5112 7.48642 14.429 7.47814 14.3503C7.47081 14.2807 7.44894 14.2134 7.41394 14.1527C7.37439 14.0842 7.31195 14.0279 7.18708 13.9154L3.82246 10.8832C3.40005 10.5025 3.18884 10.3122 3.16258 10.1342C3.13978 9.97956 3.19059 9.82316 3.29993 9.71147C3.42581 9.58288 3.70856 9.55304 4.27406 9.49336L8.77835 9.01795C8.94553 9.00031 9.02911 8.99149 9.10139 8.95929C9.16534 8.93081 9.2226 8.8892 9.26946 8.83718C9.32241 8.77839 9.35663 8.70162 9.42508 8.54808L11.2691 4.41115Z"
-                                stroke="#ce2327" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </g>
-                    </svg>
-                </li>
-            </ul>
-
-            <ProgressBar :number="3" :maxStars="5" />
-
+            <template v-if="scale && scale.questions[currentQuestionIndex]">
+        <div class="question-container">
             <div class="bg-red-100 py-12 text-center rounded-xl">
                 <h3 class="my-0 text-2xl">
-                    My child feels sad or empty
-
+                    {{ scale.questions[currentQuestionIndex].text }}
                 </h3>
-
             </div>
             <br>
-
-            <p class="text-xs mb-2 text-gray-600">Choose your answer</p>
-            <ul class="grid grid-cols-2 gap-2">
-                <!-- Option 1 -->
-                <li>
-                    <input type="radio" id="option1" name="answer" class="hidden peer">
-                    <label for="option1"
-                        class="inline-flex bg-gray-100 text-black w-full px-2 py-2 rounded-lg text-sm transition-colors duration-300 peer-checked:bg-red-500 peer-checked:text-white cursor-pointer">
-                        Never
-                    </label>
-                </li>
-
-                <!-- Option 2 -->
-                <li>
-                    <input type="radio" id="option2" name="answer" class="hidden peer">
-                    <label for="option2"
-                        class="inline-flex  bg-gray-100 text-black w-full px-2 py-2 rounded-lg text-sm transition-colors duration-300 peer-checked:bg-red-500 peer-checked:text-white cursor-pointer">
-                        Sometimes
-                    </label>
-                </li>
-
-                <!-- Option 3 -->
-                <li>
-                    <input type="radio" id="option3" name="answer" class="hidden peer">
-                    <label for="option3"
-                        class="inline-flex  bg-gray-100 text-black w-full px-2 py-2 rounded-lg text-sm transition-colors duration-300 peer-checked:bg-red-500 peer-checked:text-white cursor-pointer">
-                        Always
-                    </label>
-                </li>
-
-                <!-- Option 4 -->
-                <li>
-                    <input type="radio" id="option4" name="answer" class="hidden peer">
-                    <label for="option4"
-                        class="inline-flex bg-gray-100 text-black w-full px-2 py-2 rounded-lg text-sm transition-colors duration-300 peer-checked:bg-red-500 peer-checked:text-white cursor-pointer">
-                        Other
-                    </label>
-                </li>
+          <p v-if="scale.questions[currentQuestionIndex].subtext">{{ scale.questions[currentQuestionIndex].subtext }}</p>
+          
+          <!-- Render options -->
+          <template v-if="scale.questions[currentQuestionIndex].type === 'select_one'">
+            <ul class="options grid grid-cols-2 gap-2">
+              <li v-for="option in scale.questions[currentQuestionIndex].options" :key="option.id">
+                <input 
+                  class="hidden peer"
+                  type="radio" 
+                  :id="`option-${option.id}`" 
+                  :name="`question-${scale.questions[currentQuestionIndex].id}`"
+                  :value="option.value"
+                  v-model="answers[scale.questions[currentQuestionIndex].id]"
+                  @change="recordAnswer(scale.questions[currentQuestionIndex].id, option.value)"
+                />
+                <label class="inline-flex bg-gray-100 text-black w-full px-2 py-2 rounded-lg text-sm transition-colors duration-300 peer-checked:bg-red-500 peer-checked:text-white cursor-pointer" :for="`option-${option.id}`">{{ option.text }}</label>
+              </li>
             </ul>
+          </template>
+          
+          <template v-else-if="scale.questions[currentQuestionIndex].type === 'select_multiple'">
+            <ul class="options grid grid-cols-2 gap-2">
+              <li v-for="option in scale.questions[currentQuestionIndex].options" :key="option.id">
+                <input 
+                  class="hidden peer"
+                  type="checkbox" 
+                  :id="`option-${option.id}`" 
+                  :value="option.value"
+                  :checked="answers[scale.questions[currentQuestionIndex].id]?.includes(option.value)"
+                  @change="toggleMultipleChoiceAnswer(scale.questions[currentQuestionIndex].id, option.value, $event.target.checked)"
 
+                />
+                <label class="inline-flex bg-gray-100 text-black w-full px-2 py-2 rounded-lg text-sm transition-colors duration-300 peer-checked:bg-blue-500 peer-checked:text-white cursor-pointer" :for="`option-${option.id}`">{{ option.text }}</label>
+              </li>
+            </ul>
+          </template>
+          
+          <template v-else-if="scale.questions[currentQuestionIndex].type === 'text'">
+            <input 
+              type="text" 
+              class="text-input" 
+              v-model="answers[scale.questions[currentQuestionIndex].id]"
+              @input="recordAnswer(scale.questions[currentQuestionIndex].id, $event.target.value)"
+            />
+          </template>
 
+          <template v-else-if="scale.questions[currentQuestionIndex].type === 'slider'">
+            <input 
+              type="range" 
+              min="1" 
+              max="5" 
+              step="1" 
+              v-model="answers[scale.questions[currentQuestionIndex].id]"
+              @input="recordAnswer(scale.questions[currentQuestionIndex].id, $event.target.value)"
+            />
+          </template>
+        </div>
 
-            <!-- <div class="flex justify-between mt-12">
-                <ion-button type="submit" expand="block" fill="outline" class="mt-4 rounded-lg">
-                    prev
-                </ion-button>
-                <ion-button type="submit" expand="block" fill="outline" class="mt-4 rounded-lg">
-                    Continue
-                </ion-button>
-            </div> -->
-
+        <!-- Navigation Buttons -->
+        <div class="navigation">
+          <ion-button @click="prevQuestion" :disabled="currentQuestionIndex === 0">Previous</ion-button>
+          <ion-button @click="nextQuestion">Next</ion-button>
+        </div>
+      </template>
 
 
 
@@ -262,12 +121,128 @@
 <script setup lang="ts">
 import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonContent, IonButton } from '@ionic/vue';
 import { useRouter } from 'vue-router';
-// import StarProgressBar from '@/components/ProgressBar.vue'; // Adjust the path if necessary
+import { ref, onMounted, computed } from 'vue';
+import axios from 'axios';
+import ProgressBar from '@/components/ProgressBar.vue';
+
+const scale = ref<any>(null);
+const selectedScale = ref();
+const questions = ref([]); // Holds all questions fetched from the API
+const currentQuestionIndex = ref(0);
+const answers = ref<Record<number, any>>({}); // Answers keyed by question ID
+
+// Define types
+interface Option {
+  id: number;
+  text: string;
+  is_image?: string;
+  value: number;
+  order: number;
+}
+
+interface Question {
+  id: number;
+  text: string;
+  subtext?: string | null;
+  image?: string | null;
+  type: "select_one" | "select_multiple" | "slider" | "text";
+  order: number;
+  options: Option[];
+}
+
+interface Scale {
+  id: number;
+  name: string;
+  questions: Question[];
+}
+
+onMounted(() => {
+    if (typeof router.currentRoute.value.params.id === 'string') {
+        selectedScale.value = router.currentRoute.value.params.id;
+        fetchScales(selectedScale.value);
+    } else {
+        console.log("Something went wrong");
+    }
+});
+
+const currentQuestion = computed(() => questions.value[currentQuestionIndex.value]);
+
+const fetchScales = async (id: string) => {
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/scale/${id}`, 
+            {headers: { Authorization: `Bearer ${localStorage.getItem('api_token')}` },
+        });
+        scale.value = response.data.data;        
+  } catch (error) {
+    console.error('Error fetching scale data:', error);
+  }
+};
+
+const recordAnswer = (questionId: number, answer: any) => {
+  answers.value[questionId] = answer;
+};
+
+const toggleMultipleChoiceAnswer = (questionId: number, value: any, isChecked: boolean) => {
+  const currentAnswers = answers.value[questionId] || [];
+  if (isChecked) {
+    answers.value[questionId] = [...currentAnswers, value];
+  } else {
+    answers.value[questionId] = currentAnswers.filter((v: any) => v !== value);
+  }
+};
+
+const sendAnswer = async () => {
+    const currentQuestion = scale.value.questions[currentQuestionIndex.value];
+    const answer = answers.value[currentQuestion.id];
+    let payload = {};
+    if(currentQuestion.type === 'select_one'){
+        const chosenOption = currentQuestion.options.find(
+            (option: Option) => option.value === answer
+            );
+
+            if (chosenOption) {
+            payload = { option_id: chosenOption.id };
+            } else {
+            console.error("Chosen option not found!");
+            return;
+            }
+    } else if (currentQuestion.type === 'select_multiple'){
+        payload = { text_answer: answer.toString() };
+    } else if (currentQuestion.type === 'text'){
+        payload = { text_answer: answer }
+    } else if (currentQuestion.type === 'slider'){
+        payload = { numeric_answer: answer }
+    }
+    console.log(payload);
+    const response = await axios.post(
+        `${import.meta.env.VITE_API_ENDPOINT}/question/respond/${currentQuestion.id}`,
+        payload,
+        { headers: { Authorization: `Bearer ${localStorage.getItem('api_token')}` } }
+    );
+}
+
+const nextQuestion = async () => {
+  if (currentQuestionIndex.value < (scale.value?.questions.length || 0) - 1) {
+    await sendAnswer();
+    currentQuestionIndex.value++;
+  } else {
+    await sendAnswer();
+    await submitAnswers();
+  }
+};
+
+const prevQuestion = () => {
+  if (currentQuestionIndex.value > 0) {
+    currentQuestionIndex.value--;
+  }
+};
+
+const submitAnswers = async () => {
+    const profile = scale.value.visible_to;
+    router.push({ name: 'Dashboard', query: { profile, refresh: Date.now() } });
+};
 
 const router = useRouter();
-const navigateToBoxC = () => {
-    router.push('/quizA');
-};
 </script>
 
 <style scoped>

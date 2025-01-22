@@ -32,7 +32,8 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/Parent.vue') // Page for Box B
   },
   {
-    path: '/quizA',
+    path: '/scale/:id',
+    name: 'Questions',
     component: () => import('@/views/Question.vue') // Page for Box A
   }
 ];

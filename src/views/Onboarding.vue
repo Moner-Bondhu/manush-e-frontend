@@ -198,7 +198,7 @@
         const parent_dob = ref('');
         const parent_type = ref('');
         const parent_grade = ref('');
-    
+
       const nextStep = () => {
         if (currentStep.value < 8) {
           currentStep.value++;
@@ -231,6 +231,13 @@
         "gender" : parent_type.value === 'mother' ? "female" : "male",
         "grade" : parent_grade.value
       };
+
+      let isChildDataIncomplete = Object.values(childData).some(value => value === "" || value === null || value === undefined);
+      let isParentDataIncomplete = Object.values(parentData).some(value => value === "" || value === null || value === undefined);
+
+      if (isChildDataIncomplete || isParentDataIncomplete) {
+        currentStep.value = 1;
+      }
         try {
           const childResponse = await axios.post(`${import.meta.env.VITE_API_ENDPOINT}/profile/create`, childData, {
             headers: { Authorization: `Bearer ${localStorage.getItem('api_token')}` },

@@ -10,26 +10,26 @@
             <div>
               <form @submit.prevent="handleSubmit" class="flex flex-col mt-8">
                 <div v-if="currentStep === 1">
-                  <label class="text-sm font-medium mb-2">Tell us your child's name</label>
+                  <label class="text-sm font-medium mb-2">আপনার সন্তানের নাম বলুন</label>
                   <input v-model="child_name" type="text" placeholder="Your child's name"
                     class="shadow-xs w-full rounded-lg border border-stroke bg-white p-3 text-sm font-medium outline-none transition-all duration-200 focus:ring-2 focus:ring-red-500" />
                 </div>
   
                 <div v-else-if="currentStep === 2">
-                  <label class="text-sm font-medium mb-2">Tell us your child's date of birth</label>
+                  <label class="text-sm font-medium mb-2">আপনার সন্তানের বয়স কত?</label>
                   <input v-model="child_dob" type="date" placeholder="Your child's date of birth"
                     class="shadow-xs w-full rounded-lg border border-stroke bg-white p-3 text-sm font-medium outline-none transition-all duration-200 focus:ring-2 focus:ring-red-500" />
                 </div>
                 
                 <div v-else-if="currentStep === 3">
-                  <label class="text-sm font-medium mb-2">Tell us your child's gender</label>
+                  <label class="text-sm font-medium mb-2">আপনার সন্তান কি...</label>
                     <ul class="grid grid-cols-2 gap-2">
                     <!-- Option 1 -->
                     <li>
                         <input v-model="child_gender" type="radio" id="option1" name="child_gender" value="male" class="hidden peer">
                         <label for="option1"
                             class="inline-flex bg-gray-100 text-black w-full px-2 py-2 rounded-lg text-sm transition-colors duration-300 peer-checked:bg-red-500 peer-checked:text-white cursor-pointer">
-                            Male
+                            ছেলে
                         </label>
                     </li>
 
@@ -38,7 +38,7 @@
                         <input v-model="child_gender" type="radio" id="option2" name="child_gender" value="female" class="hidden peer">
                         <label for="option2"
                             class="inline-flex bg-gray-100 text-black w-full px-2 py-2 rounded-lg text-sm transition-colors duration-300 peer-checked:bg-red-500 peer-checked:text-white cursor-pointer">
-                            Female
+                            মেয়ে
                         </label>
                     </li>
 
@@ -47,55 +47,55 @@
                         <input v-model="child_gender" type="radio" id="option3" name="child_gender" value="other" class="hidden peer">
                         <label for="option3"
                             class="inline-flex bg-gray-100 text-black w-full px-2 py-2 rounded-lg text-sm transition-colors duration-300 peer-checked:bg-red-500 peer-checked:text-white cursor-pointer">
-                            Other
+                            অন্যান্য
                         </label>
                     </li>
                 </ul>
                 </div>
   
                 <div v-else-if="currentStep === 4">
-                  <label class="text-sm font-medium mb-2">Which grade does your child go to?</label>
+                  <label class="text-sm font-medium mb-2">আপনার সন্তান কোন ক্লাসে পরে?</label>
                   <select 
                     v-model="child_grade" 
                     class="shadow-xs w-full rounded-lg border border-stroke bg-white p-3 text-sm font-medium outline-none transition-all duration-200 focus:ring-2 focus:ring-red-500">
                     <option value="" disabled>Select grade</option>
-                    <option value="1">Grade 1</option>
-                    <option value="2">Grade 2</option>
-                    <option value="3">Grade 3</option>
-                    <option value="4">Grade 4</option>
-                    <option value="5">Grade 5</option>
-                    <option value="6">Grade 6</option>
-                    <option value="7">Grade 7</option>
-                    <option value="8">Grade 8</option>
-                    <option value="9">Grade 9</option>
-                    <option value="10">Grade 10</option>
-                    <option value="11">Grade 11</option>
-                    <option value="12">Grade 12</option>
-                    <option value="other">Other</option>
+                    <option value="1">ক্লাস ১</option>
+                    <option value="2">ক্লাস ২</option>
+                    <option value="3">ক্লাস ৩</option>
+                    <option value="4">ক্লাস ৪</option>
+                    <option value="5">ক্লাস ৫</option>
+                    <option value="6">ক্লাস ৬</option>
+                    <option value="7">ক্লাস ৭</option>
+                    <option value="8">ক্লাস ৮</option>
+                    <option value="9">ক্লাস ৯</option>
+                    <option value="10">ক্লাস ১০ / মেট্রিক / এসএসসি</option>
+                    <option value="11">ক্লাস ১১ </option>
+                    <option value="12">ক্লাস ১২ / ইন্টার / এইচএসসি</option>
+                    <option value="other">অন্যান্য</option>
                 </select>
                 </div>
 
                 <div v-if="currentStep === 5">
-                  <label class="text-sm font-medium mb-2">Great! Now tell me your name.</label>
+                  <label class="text-sm font-medium mb-2">ধন্যবাদ! এখন আপনার নাম বলুন! (অভিভাবক)</label>
                   <input v-model="parent_name" type="text" placeholder="Your name"
                     class="shadow-xs w-full rounded-lg border border-stroke bg-white p-3 text-sm font-medium outline-none transition-all duration-200 focus:ring-2 focus:ring-red-500" />
                 </div>
 
                 <div v-else-if="currentStep === 6">
-                  <label class="text-sm font-medium mb-2">When were you born?</label>
+                  <label class="text-sm font-medium mb-2">আপনার বয়স কত? (অভিভাবক)</label>
                   <input v-model="parent_dob" type="date" placeholder="Your date of birth"
                     class="shadow-xs w-full rounded-lg border border-stroke bg-white p-3 text-sm font-medium outline-none transition-all duration-200 focus:ring-2 focus:ring-red-500" />
                 </div>
 
                 <div v-if="currentStep === 7">
-                  <label class="text-sm font-medium mb-2">Are you the father, mother or other legal guardian of the child?</label>
+                  <label class="text-sm font-medium mb-2">আপনি সন্তানের কি হন?</label>
                   <ul class="grid grid-cols-2 gap-2">
                     <!-- Option 1 -->
                     <li>
                         <input v-model="parent_type" type="radio" id="option1" name="parent_type" value="father" class="hidden peer">
                         <label for="option1"
                             class="inline-flex bg-gray-100 text-black w-full px-2 py-2 rounded-lg text-sm transition-colors duration-300 peer-checked:bg-red-500 peer-checked:text-white cursor-pointer">
-                            Father
+                            বাবা
                         </label>
                     </li>
 
@@ -104,7 +104,7 @@
                         <input v-model="parent_type" type="radio" id="option2" name="parent_type" value="mother" class="hidden peer">
                         <label for="option2"
                             class="inline-flex bg-gray-100 text-black w-full px-2 py-2 rounded-lg text-sm transition-colors duration-300 peer-checked:bg-red-500 peer-checked:text-white cursor-pointer">
-                            Mother
+                            মা
                         </label>
                     </li>
 
@@ -113,38 +113,38 @@
                         <input v-model="parent_type" type="radio" id="option3" name="parent_type" value="guardian" class="hidden peer">
                         <label for="option3"
                             class="inline-flex bg-gray-100 text-black w-full px-2 py-2 rounded-lg text-sm transition-colors duration-300 peer-checked:bg-red-500 peer-checked:text-white cursor-pointer">
-                            Other guardian
+                            অভিভাবক
                         </label>
                     </li>
                 </ul>
                 </div>
 
                 <div v-if="currentStep === 8">
-                  <label class="text-sm font-medium mb-2">Lastly, what's your current occupation?</label>
+                  <label class="text-sm font-medium mb-2">আপনার পেশা কি?</label>
                   <select 
                     v-model="parent_grade" 
                     class="shadow-xs w-full rounded-lg border border-stroke bg-white p-3 text-sm font-medium outline-none transition-all duration-200 focus:ring-2 focus:ring-red-500">
                     <option value="" disabled>Select occupation</option>
-                    <option value="farmer">Farmer</option>
-                    <option value="small_business_owner">Small Business Owner</option>
-                    <option value="teacher">Teacher</option>
-                    <option value="tailor">Tailor</option>
-                    <option value="garments_worker">Garments Worker</option>
-                    <option value="day_laborer">Day Laborer</option>
-                    <option value="shopkeeper">Shopkeeper</option>
-                    <option value="rickshaw_puller">Rickshaw Puller</option>
-                    <option value="homemaker">Homemaker</option>
-                    <option value="artisan">Artisan (Handicrafts, Weaving, Pottery, etc.)</option>
-                    <option value="government_employee">Government Employee</option>
-                    <option value="private_sector_employee">Private Sector Employee</option>
-                    <option value="fisherman">Fisherman</option>
-                    <option value="driver">Driver</option>
-                    <option value="healthcare_worker">Healthcare Worker</option>
-                    <option value="construction_worker">Construction Worker</option>
-                    <option value="imams_or_religious_leader">Imam or Religious Leader</option>
-                    <option value="unemployed">Unemployed</option>
-                    <option value="student">Student</option>
-                    <option value="other">Other</option>
+                    <option value="farmer">কৃষিকাজ</option>
+                    <option value="small_business_owner">খুদ্র ব্যাবসা</option>
+                    <option value="teacher">শিক্ষক</option>
+                    <option value="tailor">দর্জি</option>
+                    <option value="garments_worker">গার্মেন্টস কর্মী</option>
+                    <!-- <option value="day_laborer">Day Laborer</option> -->
+                    <option value="shopkeeper">দোকান</option>
+                    <option value="rickshaw_puller">রিকশা চালক</option>
+                    <option value="homemaker">গৃহিণী</option>
+                    <option value="artisan">কারিগর (হস্তশিল্প, তাঁত, মৃৎশিল্প, ইত্যাদি)</option>
+                    <option value="government_employee">সরকারি চাকুরিজীবী</option>
+                    <option value="private_sector_employee">বেসরকারি চাকুরিজীবী</option>
+                    <option value="fisherman">জেলে</option>
+                    <option value="driver">গাড়ি চালক</option>
+                    <option value="healthcare_worker">স্বাস্থ্যকর্মী</option>
+                    <option value="construction_worker">নির্মাণ শ্রমিক</option>
+                    <option value="imams_or_religious_leader">ইমাম বা ধর্মীয় নেতা</option>
+                    <option value="unemployed">এই মুহুর্তে কোন পেশায় নিয়োজিত নই</option>
+                    <option value="student">শিক্ষার্থী</option>
+                    <option value="other">উপরে উল্লেখ করা হয়নি/অন্যান্য</option>
                 </select>
                 </div>
   

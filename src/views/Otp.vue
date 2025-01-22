@@ -9,8 +9,7 @@
 
                     <div class="">
 
-                        <p class="text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit voluptas
-                            odio voluptatum
+                        <p class="text-sm">আপনার ফোন নম্বরে একটি ৪ ডিজিটের কোড গিয়েছে।
                         </p>
                         <form @submit.prevent="handleSubmit" class="flex flex-col mt-8">
 

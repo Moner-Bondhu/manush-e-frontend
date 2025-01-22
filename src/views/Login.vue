@@ -4,13 +4,12 @@
             <ion-img src="/mb-logo.svg" class="w-[100px] mx-auto my-4"></ion-img>
             <section class="flex flex-col w-full items-center justify-center  p-3">
                 <div class="p-4  w-full">
-                    <h2 class="text-xl text-center">Welcome to <span class="text-red-600">Manush-E</span></h2>
+                    <h2 class="text-xl text-center">মানুষ-ই তে <span class="text-red-600">স্বাগতম</span></h2>
                     <ion-img src="/intro.png" class="w-[65%] mx-auto my-4"></ion-img>
 
                     <div class="">
 
-                        <p class="text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit voluptas
-                            odio voluptatum
+                        <p class="text-sm">আপনার ফোন নম্বরে আমরা একটি কোড পাঠাবো।
                         </p>
                         <form @submit.prevent="handleSubmit" class="flex flex-col mt-8">
 

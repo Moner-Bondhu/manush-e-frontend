@@ -2,7 +2,7 @@
     <ion-page>
         <ion-content :fullscreen="true">
             <section class="flex flex-col  h-full p-3">
-                <h2 class="text-xl text-center mb-8">Who is using <span class="text-red-600">Manush-E</span>?</h2>
+                <h2 class="text-xl text-center mb-8">কে <span class="text-red-600"></span>মানুষ-ই ব্যবহার করছেন?</h2>
                 <!-- <div class="">
                     <div class="flex  gap-4  w-full shadow p-4 rounded-lg mx-auto  border border-2 border-red-600 mb-2"
                         @click="navigateToBoxA">
@@ -34,7 +34,7 @@
                             <ion-img src="/Children.png" class="w-[70px] mx-auto "></ion-img>
                         </div>
                         <div class="">
-                            <h2 class="text-lg my-0 text-red-600 tracking-wider	font-semibold  text-center">CHILD</h2>
+                            <h2 class="text-lg my-0 text-red-600 tracking-wider	font-semibold  text-center">সন্তান</h2>
                             <p class="text-xs text-center" id="childName">{{ childName }}</p>
                         </div>
 
@@ -45,7 +45,7 @@
                             <ion-img src="/Parents.png" class="w-[70px] mx-auto "></ion-img>
                         </div>
                         <div class="col-span-3 ">
-                            <h2 class="text-lg my-0 text-red-600 tracking-wider	font-semibold text-center">PARENT</h2>
+                            <h2 class="text-lg my-0 text-red-600 tracking-wider	font-semibold text-center">অভিভাবক</h2>
                             <p class="text-xs text-center" id="parentName">{{ parentName }}</p>
                         </div>
 

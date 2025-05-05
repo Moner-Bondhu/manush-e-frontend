@@ -2,5 +2,116 @@
 http://ionicframework.com/docs/theming/ */
 
 body {
-    font-family: 'Poppins', sans-serif !important;
+    font-family: 'LiAdorNoirritVR', sans-serif !important;
+}
+
+/* Define the variable font for LiAdorNoirritVR-VF */
+@font-face {
+    font-family: 'LiAdorNoirritVR';
+    src: url('/LiAdorNoirritVR-VF.ttf') format('truetype');
+    font-weight: 100 700; /* Define the weight range (100: ExtraLight, 700: Bold) */
+    font-style: normal;
+}
+
+/* For italic versions, define separately */
+@font-face {
+    font-family: 'LiAdorNoirritVR';
+    src: url('/LiAdorNoirritVR-VF.ttf') format('truetype');
+    font-weight: 100 700; /* Define the weight range (100: ExtraLight, 700: Bold) */
+    font-style: italic;
+}
+
+/* Custom utility classes for different weights */
+.font-extralight {
+    font-family: 'LiAdorNoirritVR', sans-serif;
+    font-variation-settings: 'wght' 150; /* ExtraLight weight */
+}
+
+.font-light {
+    font-family: 'LiAdorNoirritVR', sans-serif;
+    font-variation-settings: 'wght' 200; /* Light weight */
+}
+
+.font-regular {
+    font-family: 'LiAdorNoirritVR', sans-serif;
+    font-variation-settings: 'wght' 300; /* Regular weight */
+}
+
+.font-semibold {
+    font-family: 'LiAdorNoirritVR', sans-serif;
+    font-variation-settings: 'wght' 450; /* SemiBold weight */
+}
+
+.font-bold {
+    font-family: 'LiAdorNoirritVR', sans-serif;
+    font-variation-settings: 'wght' 700; /* Bold weight */
+}
+
+.font-italic {
+    font-family: 'LiAdorNoirritVR', sans-serif;
+    font-style: italic;
+}
+
+.font-extralight-italic {
+    font-family: 'LiAdorNoirritVR', sans-serif;
+    font-variation-settings: 'wght' 100;
+    font-style: italic;
+}
+
+.font-light-italic {
+    font-family: 'LiAdorNoirritVR', sans-serif;
+    font-variation-settings: 'wght' 200;
+    font-style: italic;
+}
+
+.font-regular-italic {
+    font-family: 'LiAdorNoirritVR', sans-serif;
+    font-variation-settings: 'wght' 400;
+    font-style: italic;
+}
+
+.font-semibold-italic {
+    font-family: 'LiAdorNoirritVR', sans-serif;
+    font-variation-settings: 'wght' 600;
+    font-style: italic;
+}
+
+.font-bold-italic {
+    font-family: 'LiAdorNoirritVR', sans-serif;
+    font-variation-settings: 'wght' 700;
+    font-style: italic;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300..900&display=swap');
+
+
+/* Poppins font classes for various weights */
+.font-poppins-extralight {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300; /* Extralight weight */
+}
+
+.font-poppins-light {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400; /* Light weight */
+}
+
+.font-poppins-regular {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500; /* Regular weight */
+}
+
+.font-poppins-semibold {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600; /* SemiBold weight */
+}
+
+.font-poppins-bold {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700; /* Bold weight */
+}
+
+.font-poppins-black {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 900; /* Black weight */
 }

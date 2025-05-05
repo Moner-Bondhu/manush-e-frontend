@@ -1,29 +1,34 @@
 <template>
     <ion-page>
         <ion-content :fullscreen="true">
-            <ion-img src="/mb-logo.svg" class="w-[100px] mx-auto my-4"></ion-img>
-            <section class="flex flex-col w-full items-center justify-center  p-3">
+            <ion-img src="/mb-logo.svg" class="w-1/3 mx-auto mt-8"></ion-img>
+            <section class="flex flex-col w-full items-center justify-center p-2">
                 <div class="p-4  w-full">
-                    <h2 class="text-xl text-center">মানুষ-ই তে <span class="text-red-600">স্বাগতম</span></h2>
-                    <ion-img src="/intro.png" class="w-[65%] mx-auto my-4"></ion-img>
+                    <h2 class="text-2xl font-semibold text-center"><span class="text-red-600">মানুষ-ই</span> তে স্বাগতম</h2>
+                    <ion-img src="/intro.png" class="mx-auto my-8"></ion-img>
 
                     <div class="">
 
-                        <p class="text-sm">আপনার ফোন নম্বরে আমরা একটি কোড পাঠাবো।
+                        <p class="text-sm font-regular text-center"><span class="text-red-600">লগইন</span> করতে আপনার ফোন নাম্বার দিন
                         </p>
-                        <form @submit.prevent="handleSubmit" class="flex flex-col mt-8">
+                        <form @submit.prevent="handleSubmit" class="flex flex-col mt-4">
 
-                            <div class="relative w-full">
-                                <span class="absolute left-0 top-1/2 transform -translate-y-1/2 text-gray-500">+88</span>
+                            <div class="flex relative w-full h-8 bg-gray-300 rounded justify-end">
+                                <img
+                                    src="https://flagcdn.com/bd.svg"
+                                    width="25"
+                                    alt="Bangladesh"
+                                    class="absolute left-2 top-1/2 transform -translate-y-1/2">
+                                <span class="absolute left-10 top-1/2 transform -translate-y-1/2 text-sm font-poppins-regular text-gray-700">+88</span>
                                 <input 
                                   v-model="phoneNumber" 
                                   type="text" 
-                                  placeholder="আপনার ফোন নাম্বার দিন (যেমন: 01534618836)" 
-                                  class="shadow-xs w-full pl-12 rounded-lg border border-stroke bg-white p-3 text-sm font-medium outline-none transition-all duration-200 focus:ring-2 focus:ring-red-500" 
+                                  placeholder="015********" 
+                                  class="shadow-xs w-3/4 pl-2 rounded border border-stroke bg-white p-1 text-sm font-poppins-regular text-gray-700 outline-none transition-all duration-200 focus:ring-1 focus:ring-red-400" 
                                 />
                             </div>
-                            <ion-button type="submit" expand="block" fill="outline" class="mt-4 rounded-lg">
-                                Continue
+                            <ion-button type="submit" size="small" expand="block" fill="outline" class="font-light mt-2 text-sm">
+                                পরবর্তি
                             </ion-button>
                         </form>
                         <ion-button 
@@ -100,12 +105,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
-* {
-    font-family: 'Poppins', sans-serif !important;
-}
-
+*
 ion-button {
-    --background: #ce2327;
+    --background: #FF3D3D;
     --color: white;
     --border-width: 0px;
 }

@@ -7,6 +7,10 @@ const routes: Array<RouteRecordRaw> = [
     redirect: '/login' // Redirect to login
   },
   {
+    path: '/home',
+    component: () => import('@/views/Home.vue') // Page for user input
+  },
+  {
     path: '/login',
     component: () => import('@/views/Login.vue') // Page for user input
   },

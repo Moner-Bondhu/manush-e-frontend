@@ -279,21 +279,18 @@
 </template>
 
 <script lang="ts">
-    import { IonButton, IonIcon, IonCard, IonCardHeader, IonCardContent, IonImg } from '@ionic/vue';
-    import { onMounted } from 'vue';
+    import { IonButton, IonCard, IonCardHeader, IonCardContent, IonImg } from '@ionic/vue';
     import { useRouter } from 'vue-router';
-    import { defineComponent } from 'vue';
-    import { ref, reactive } from '@vue/reactivity';
-    import { heart, logoApple, settingsSharp, star } from 'ionicons/icons';
+    import { defineComponent, ref, reactive } from 'vue';
 
-    import { Swiper, SwiperSlide } from 'swiper/vue';
+    // import { Swiper, SwiperSlide } from 'swiper/vue';
     import SwiperCore from 'swiper';
     import { Pagination } from 'swiper/modules';
     SwiperCore.use([Pagination]);
     import 'swiper/css';
     import 'swiper/css/pagination';
     import 'swiper/css/navigation';
-    import Calendar from '@/components/Calendar.vue';
+    // import Calendar from '@/components/Calendar.vue';
 
     export default defineComponent({
     components: {

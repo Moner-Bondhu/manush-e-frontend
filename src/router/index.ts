@@ -8,19 +8,19 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/home',
-    component: () => import('@/views/Home.vue') // Page for user input
+    component: () => import('@/views/HomePage.vue') // Page for user input
   },
   {
     path: '/login',
-    component: () => import('@/views/Login.vue') // Page for user input
+    component: () => import('@/views/LoginPage.vue') // Page for user input
   },
   {
     path: '/send-otp',
-    component: () => import('@/views/Otp.vue') // Page for OTP
+    component: () => import('@/views/OtpPage.vue') // Page for OTP
   },
   {
     path: '/onboarding',
-    component: () => import('@/views/Onboarding.vue') // Page for OTP
+    component: () => import('@/views/OnboardingPage.vue') // Page for OTP
   },
   {
     path: '/choice',
@@ -29,16 +29,16 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: () => import('@/views/Dashboard.vue') // Page for Box A
+    component: () => import('@/views/DashboardPage.vue') // Page for Box A
   },
   {
     path: '/boxB',
-    component: () => import('@/views/Parent.vue') // Page for Box B
+    component: () => import('@/views/ParentPage.vue') // Page for Box B
   },
   {
     path: '/scale/:id',
     name: 'Questions',
-    component: () => import('@/views/Question.vue') // Page for Box A
+    component: () => import('@/views/QuestionPage.vue') // Page for Box A
   }
 ];
 

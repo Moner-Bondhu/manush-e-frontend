@@ -59,7 +59,7 @@
 </template>
 
 <script setup lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonContent, IonButton } from '@ionic/vue';
+import { IonPage, IonContent, IonImg} from '@ionic/vue';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 import axios from 'axios';
@@ -67,7 +67,6 @@ import axios from 'axios';
 const router = useRouter();
 const childName = ref('');
 const parentName = ref('');
-const user = ref({});
 
 interface Demography {
   id: number;
@@ -118,10 +117,6 @@ const selectProfile = (profile: string) => {
   router.push({ name: 'Dashboard', query: { profile } });
 };
 
-const navigateToBoxB = () => {
-    router.push('/boxB');
-};
-
 fetchData();
 
 </script>
@@ -138,3 +133,5 @@ ion-button {
     --padding-bottom: 20px;
 }
 </style>
+
+

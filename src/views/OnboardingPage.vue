@@ -183,7 +183,7 @@
   </template>
   
   <script setup lang="ts">
-  import { IonPage, IonContent, IonButton, IonImg, IonInput } from '@ionic/vue';
+  import { IonPage, IonContent, IonButton, IonImg, } from '@ionic/vue';
   import { ref } from 'vue';
   import axios from 'axios';
   import { useRouter } from 'vue-router';
@@ -232,8 +232,8 @@
         "grade" : parent_grade.value
       };
 
-      let isChildDataIncomplete = Object.values(childData).some(value => value === "" || value === null || value === undefined);
-      let isParentDataIncomplete = Object.values(parentData).some(value => value === "" || value === null || value === undefined);
+      const isChildDataIncomplete = Object.values(childData).some(value => value === "" || value === null || value === undefined);
+      const isParentDataIncomplete = Object.values(parentData).some(value => value === "" || value === null || value === undefined);
 
       if (isChildDataIncomplete || isParentDataIncomplete) {
         currentStep.value = 1;

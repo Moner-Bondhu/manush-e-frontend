@@ -47,7 +47,7 @@
 </template>
 
 <script setup lang="ts">
-import { IonPage, IonContent, IonButton, IonImg, IonInput } from '@ionic/vue';
+import { IonPage, IonContent, IonButton, IonImg, } from '@ionic/vue';
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';

@@ -41,29 +41,29 @@
                     <div v-if="scales && scales.length"  class=" flex flex-col gap-2">
 
                         <div v-for="(scale, id) in scales" :key="id" class="w-full p-3 border border-gray-200 rounded-lg shadow bg-blue-100"
-                        v-bind:class="{ 'bg-red-100' : scale.status === 'incomplete'}" @click="scale.status === 'incomplete' ? startScale(scale.id) : ''">
-                            <div class="flex items-items-start gap-1">
-                                <div class="flex items-start gap-1">
-                                    <ion-img src="/sleep.svg" class="w-5 pt-1"></ion-img>
-                                    <h2 class="text-lg font-semibold my-0 text-black">{{ scale.name }}</h2>
+                            v-bind:class="{ 'bg-red-100' : scale.status === 'incomplete'}" @click="scale.status === 'incomplete' ? startScale(scale.id) : ''">
+                                <div class="flex items-items-start gap-1">
+                                    <div class="flex items-start gap-1">
+                                        <ion-img src="/sleep.svg" class="w-5 pt-1"></ion-img>
+                                        <h2 class="text-lg font-semibold my-0 text-black">{{ scale.name }}</h2>
+                                    </div>
+                                    <p v-if="scale.status === 'complete'" class="ml-auto text-sm font-regular text-gray-800 w-fit h-7 bg-green-300 px-2 py-1 rounded-lg text-nowrap">
+                                        সম্পন্ন হয়েছে
+                                    </p>
+                                    <p v-if="scale.status === 'incomplete'" class="ml-auto text-sm font-regular text-gray-800 w-fit h-7 bg-red-300 px-2 py-1 rounded-lg text-nowrap">
+                                        করা হয় নি
+                                    </p>
                                 </div>
-                                <p v-if="scale.status === 'complete'" class="ml-auto text-sm font-regular text-gray-800 w-fit h-7 bg-green-300 px-2 py-1 rounded-lg text-nowrap">
-                                    সম্পন্ন হয়েছে
+
+
+                                <p class="text-base font-regular text-gray-800 py-2">
+                                    {{ scale.description }}
                                 </p>
-                                <p v-if="scale.status === 'incomplete'" class="ml-auto text-sm font-regular text-gray-800 w-fit h-7 bg-red-300 px-2 py-1 rounded-lg text-nowrap">
-                                    করা হয় নি
-                                </p>
-                            </div>
+                                <!-- <p class=" text-xs text-gray-800 w-fit bg-white px-2 py-1 rounded-lg">
+                                    3 min
+                                </p> -->
 
-
-                            <p class="text-base font-regular text-gray-800 py-2">
-                                {{ scale.description }}
-                            </p>
-                            <!-- <p class=" text-xs text-gray-800 w-fit bg-white px-2 py-1 rounded-lg">
-                                3 min
-                            </p> -->
-
-                            <!-- <button class="bg-black text-white w-full px-8 mt-4 py-2 rounded-2xl">Unlock</button> -->
+                                <!-- <button class="bg-black text-white w-full px-8 mt-4 py-2 rounded-2xl">Unlock</button> -->
                         </div>
                         <!-- <div class="w-full p-3 border border-gray-200 rounded-lg shadow bg-red-100">
                             <div class="flex items-center">
@@ -149,16 +149,16 @@
 </template>
 
 <script setup lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonContent, IonButton } from '@ionic/vue';
-import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router';
+import { IonPage, IonHeader, IonToolbar, IonButtons, IonContent, IonButton, IonImg } from '@ionic/vue';
+import { useRoute, useRouter } from 'vue-router';
 import { ref, onMounted, watch } from 'vue';
 import axios from 'axios';
 
-let router = useRouter();
-let route = useRoute();
+const router = useRouter();
+const route = useRoute();
 
-let scales = ref<any>(null);
-let selectedProfile = ref('');
+const scales = ref<any>(null);
+const selectedProfile = ref('');
 
 onMounted(() => {
     if (typeof router.currentRoute.value.query.profile === 'string') {

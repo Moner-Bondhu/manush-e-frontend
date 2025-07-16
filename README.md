@@ -19,52 +19,55 @@ This is the frontend of the **Manush-E** application, built using **Ionic + Vue 
 ## 📦 Project Setup
 
 ### 1. Clone the Repository
-    ```bash
-    git clone git@github.com:Moner-Bondhu/manush-e-frontend.git
-    cd manush-e-frontend
-    ```
+
+```bash
+git clone git@github.com:Moner-Bondhu/manush-e-frontend.git
+cd manush-e-frontend
+```
 ### 2. Install Dependencies
-    ```bash
-    npm install
-    ```
+
+```bash
+npm install
+```
 
 ### 3. Start Development Server
-    ```bash
-    npm run dev
-    ```
-    Then open: `http://localhost:5173`
+
+```bash
+npm run dev
+```
+Then open: `http://localhost:5173`
 
 ---
 
 ## 📱 Progressive Web App (PWA)
 This project includes support for installation as a PWA on desktop and mobile. You can test it by building:
 
-    ```bash
-    npm run build
-    npm run preview
-    ```
+```bash
+npm run build
+npm run preview
+```
 
 ## ✅ Testing
 
 ### Unit/Component Tests
-    ```bash
-    npm run test
-    ```
+```bash
+npm run test
+```
 
 ### Linting
-    ```bash
-    npm run lint
-    ```
+```bash
+npm run lint
+```
 
 ### Formatting (Prettier)
-    ```bash
-    npm run format
-    ```
+```bash
+npm run format
+```
 
 ### E2E Testing (Cypress)
-    ```bash
-    npx cypress open
-    ```
+```bash
+npx cypress open
+```
 
 ---
 

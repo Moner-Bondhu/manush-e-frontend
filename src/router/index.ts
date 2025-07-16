@@ -4,7 +4,11 @@ import { RouteRecordRaw } from 'vue-router';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/login'
+    redirect: '/login' // Redirect to login
+  },
+  {
+    path: '/home',
+    component: () => import('@/views/Home.vue') // Page for user input
   },
   {
     path: '/login',

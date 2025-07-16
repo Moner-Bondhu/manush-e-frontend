@@ -3,13 +3,13 @@
         <ion-header class="">
             <ion-toolbar class="">
                 <ion-buttons slot="">
-                    <ion-back-button default-href="/"></ion-back-button>
+                    <ion-back-button default-href="/" style="color: #FF3D3D;"></ion-back-button>
                     <!-- <ion-img src="/public/mb-logo.svg" class="w-[70px] mx-auto "></ion-img> -->
                 </ion-buttons>
             </ion-toolbar>
         </ion-header>
-        <ion-content :fullscreen="true" class="ion-padding bg-red-100">
-            <h3 v-if="scale" class="my-0 text-xl text-center mb-8">{{ scale.name }}</h3>
+        <ion-content :fullscreen="true" class="ion-padding bg-white">
+            <h3 v-if="scale" class="my-0 text-2xl font-semibold text-center mb-4">{{ scale.name }}</h3>
             <!-- <div class="bg-gray-100 p-5 rounded-xl">
                 <div class="flex justify-between">
                     <p class="text-xs font-semibold">01 Question</p>
@@ -32,17 +32,30 @@
                 </div>
             </div> -->
 
-            <div class="w-full  rounded-full h-2.5 ">
+            <!-- <div class="w-full  rounded-full h-2.5 ">
                 <div class="bg-red-600 h-1 " style="width: 45%"></div>
+            </div> -->
+            <p v-if="scale" class="text-sm font-regular mb-1 text-[#FF3D3D]">({{ toBangla(currentQuestionIndex + 1) }}/{{ toBangla(scale.questions.length) }} প্রশ্ন)</p>
+            <!-- Star Progress -->
+            <div class="flex flex-row max-w-full gap-5">
+              <ProgressBar v-if="scale" :number="currentQuestionIndex + 1" :maxStars="scale.questions.length" />
+              <div>
+                <p class="ml-auto text-sm font-regular text-white w-fit h-7 bg-[#FF5D5D] px-2 py-1 rounded-lg text-nowrap inline-flex items-center">
+                <!-- SVG Icon inside the p tag -->
+                <svg :width="16" :height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-1">
+                  <path 
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" 
+                    fill="white"
+                    stroke="white">
+                  </path>
+                </svg>
+                তোমার পয়েন্ট: {{ toBangla(currentQuestionIndex + 1) }}
+              </p></div>
             </div>
-            <p v-if="scale" class="text-xs mb-8">{{ currentQuestionIndex + 1 }} of {{ scale.questions.length }} Questions</p>
-
-            <ProgressBar v-if="scale" :number="currentQuestionIndex + 1" :maxStars="scale.questions.length" />
-
             <template v-if="scale && scale.questions[currentQuestionIndex]">
-        <div class="question-container">
-            <div class="bg-red-100 py-12 text-center rounded-xl">
-                <h3 class="my-0 text-2xl">
+        <div class="question-container py-4">
+            <div class="bg-red-100 py-6 px-6 text-center rounded-xl">
+                <h3 class="my-0 text-xl font-semibold">
                     {{ scale.questions[currentQuestionIndex].text }}
                 </h3>
             </div>
@@ -51,8 +64,8 @@
           
           <!-- Render options -->
           <template v-if="scale.questions[currentQuestionIndex].type === 'select_one'">
-            <ul class="options grid grid-cols-2 gap-2">
-              <li v-for="option in scale.questions[currentQuestionIndex].options" :key="option.id">
+            <ul class="options flex flex-wrap gap-4 justify-evenly">
+              <li v-for="option in scale.questions[currentQuestionIndex].options" :key="option.id" class="w-[calc(50%-1rem)]">
                 <input 
                   class="hidden peer"
                   type="radio" 
@@ -62,7 +75,13 @@
                   v-model="answers[scale.questions[currentQuestionIndex].id]"
                   @change="recordAnswer(scale.questions[currentQuestionIndex].id, option.value)"
                 />
-                <label class="inline-flex bg-gray-100 text-black w-full px-2 py-2 rounded-lg text-sm transition-colors duration-300 peer-checked:bg-red-500 peer-checked:text-white cursor-pointer" :for="`option-${option.id}`">{{ option.text }}</label>
+                <label class="w-full h-full inline-flex justify-center items-center bg-gray-100 text-black px-4 py-4 rounded-lg text-lg font-regular text-center transition-colors duration-300 peer-checked:bg-red-500 peer-checked:text-white cursor-pointer" 
+                :for="`option-${option.id}`">
+                <span v-if="option.text.includes('/')">
+                  <span class="font-semibold">{{ option.text.split('/')[0].trim() }}<br></span>
+                  <span class="text-sm font-regular">({{ option.text.split('/')[1].trim() }})</span>
+                </span>
+                <span v-else>{{ option.text }}</span></label>
               </li>
             </ul>
           </template>
@@ -79,7 +98,7 @@
                   @change="toggleMultipleChoiceAnswer(scale.questions[currentQuestionIndex].id, option.value, $event.target.checked)"
 
                 />
-                <label class="inline-flex bg-gray-100 text-black w-full px-2 py-2 rounded-lg text-sm transition-colors duration-300 peer-checked:bg-blue-500 peer-checked:text-white cursor-pointer" :for="`option-${option.id}`">{{ option.text }}</label>
+                <label class="inline-flex bg-gray-100 text-black px-2 py-2 rounded-lg text-sm transition-colors duration-300 peer-checked:bg-blue-500 peer-checked:text-white cursor-pointer" :for="`option-${option.id}`">{{ option.text }}</label>
               </li>
             </ul>
           </template>
@@ -106,9 +125,19 @@
         </div>
 
         <!-- Navigation Buttons -->
-        <div class="navigation">
-          <ion-button @click="prevQuestion" :disabled="currentQuestionIndex === 0">Previous</ion-button>
-          <ion-button @click="nextQuestion">Next</ion-button>
+        <div class="navigation buttons flex justify-center gap-4">
+          <ion-button 
+            @click="prevQuestion" :disabled="currentQuestionIndex === 0" 
+            style="--background: #FF4D4D;"  
+            class="text-base font-light tracking-normal">
+            পূর্ববর্তী
+          </ion-button>
+          <ion-button 
+            @click="nextQuestion"
+            style="--background: #FF4D4D;"  
+            class="text-base font-light tracking-normal">
+            পরবর্তি
+          </ion-button>
         </div>
       </template>
 
@@ -243,10 +272,15 @@ const submitAnswers = async () => {
 };
 
 const router = useRouter();
+
+function toBangla(num: number): string {
+  const banglaNumbers: string[] = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+  return num.toString().split('').map((digit: string) => banglaNumbers[parseInt(digit)]).join('');
+}
 </script>
 
-<style scoped>
+<!-- <style scoped>
 * {
     font-family: 'Poppins', sans-serif !important;
 }
-</style>
+</style> -->

@@ -59,14 +59,10 @@
 </template>
 
 <script setup lang="ts">
-import { IonPage, IonContent, IonImg} from '@ionic/vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { ref } from 'vue';
 import axios from 'axios';
-
-const router = useRouter();
-const childName = ref('');
-const parentName = ref('');
+import { IonPage, IonContent, IonImg } from '@ionic/vue';
 
 interface Demography {
   id: number;
@@ -86,40 +82,39 @@ interface Profile {
   demography: Demography;
 }
 
-async function fetchData() {  
+const router = useRouter();
+const childName = ref('');
+const parentName = ref('');
+
+const fetchData = async () => {
   try {
-    // replace `getPost` with your data fetching util / API wrapper
     const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/user`, {
-            headers: { Authorization: `Bearer ${localStorage.getItem('api_token')}` },
+      headers: { Authorization: `Bearer ${localStorage.getItem('api_token')}` },
     });
 
-    // Find the child and parent profiles from the response
     const childProfile = response.data.data.profiles.find((profile: Profile) => profile.type === 'child');
     const parentProfile = response.data.data.profiles.find((profile: Profile) => profile.type === 'parent');
 
-
-
-    // Set the names to the corresponding variables if profiles are found
     if (childProfile) {
-        childName.value = childProfile.full_name;
+      childName.value = childProfile.full_name;
     }
 
     if (parentProfile) {
-        parentName.value = parentProfile.full_name;
+      parentName.value = parentProfile.full_name;
     }
   } catch (err) {
     console.log(err);
-  } 
-}
+  }
+};
 
 const selectProfile = (profile: string) => {
-  // Redirect to the scale page with the selected profile as a query parameter
   router.push({ name: 'Dashboard', query: { profile } });
 };
 
-fetchData();
-
+onMounted(fetchData);
 </script>
+
+
 
 <style scoped>
 

@@ -178,38 +178,37 @@
                     <div class="grid grid-cols-3 gap-4 px-5 py-4">
                         <!-- Quick Option 1 -->
                         <div class="flex flex-col justify-center bg-white p-2 gap-2 rounded-lg shadow-md">
-                            <ion-icon name="sleep-outline" class="text-4xl mb-2 place-self-center"></ion-icon>
-                            <p class="text-sm font-semibold text-center">জরুরী হস্তক্ষেপ </p>
+                            <ion-icon name="help-circle" class="text-4xl mb-2 place-self-center"></ion-icon>
+                            <p class="text-sm font-regular text-center">জরুরী হস্তক্ষেপ </p>
                         </div>
 
                         <!-- Quick Option 2 -->
                         <div class="flex flex-col justify-center bg-white p-2 gap-2 rounded-lg shadow-md">
-                            <ion-icon name="sleep-outline" class="text-4xl mb-2 place-self-center"></ion-icon>
-                            <p class="text-sm font-semibold text-center">জরুরী হস্তক্ষেপ </p>
+                            <ion-icon name="help-circle" class="text-4xl mb-2 place-self-center"></ion-icon>
+                            <p class="text-sm font-regular text-center">জরুরী হস্তক্ষেপ </p>
                         </div>
 
                         <!-- Quick Option 3 -->
                         <div class="flex flex-col justify-center bg-white p-2 gap-2 rounded-lg shadow-md">
-                            <ion-icon name="sleep-outline" class="text-4xl mb-2 place-self-center"></ion-icon>
-                            <p class="text-sm font-semibold text-center">জরুরী হস্তক্ষেপ </p>
+                            <ion-icon name="help-circle" class="text-4xl mb-2 place-self-center"></ion-icon>
+                            <p class="text-sm font-regular text-center">জরুরী হস্তক্ষেপ </p>
                         </div>
-
                         <!-- Quick Option 4 -->
                         <div class="flex flex-col justify-center bg-white p-2 gap-2 rounded-lg shadow-md">
-                            <ion-icon name="sleep-outline" class="text-4xl mb-2 place-self-center"></ion-icon>
-                            <p class="text-sm font-semibold text-center">জরুরী হস্তক্ষেপ </p>
+                            <ion-icon name="help-circle" class="text-4xl mb-2 place-self-center"></ion-icon>
+                            <p class="text-sm font-regular text-center">জরুরী হস্তক্ষেপ </p>
                         </div>
 
                         <!-- Quick Option 5 -->
                         <div class="flex flex-col justify-center bg-white p-2 gap-2 rounded-lg shadow-md">
-                            <ion-icon name="sleep-outline" class="text-4xl mb-2 place-self-center"></ion-icon>
-                            <p class="text-sm font-semibold text-center">জরুরী হস্তক্ষেপ </p>
+                            <ion-icon name="help-circle" class="text-4xl mb-2 place-self-center"></ion-icon>
+                            <p class="text-sm font-regular text-center">জরুরী হস্তক্ষেপ </p>
                         </div>
 
                         <!-- Quick Option 6 -->
                         <div class="flex flex-col justify-center bg-white p-2 gap-2 rounded-lg shadow-md">
-                            <ion-icon name="sleep-outline" class="text-4xl mb-2 place-self-center"></ion-icon>
-                            <p class="text-sm font-semibold text-center">জরুরী হস্তক্ষেপ </p>
+                            <ion-icon name="help-circle" class="text-4xl mb-2 place-self-center"></ion-icon>
+                            <p class="text-sm font-regular text-center">জরুরী হস্তক্ষেপ </p>
                         </div>
                     </div>
 
@@ -273,52 +272,51 @@
                         </div>
                     </div>
                 </section> -->
-                <Calendar />
+                <!-- <Calendar /> -->
         </ion-content>
     </ion-page>
 </template>
 
-<script lang="ts">
-    import { IonButton, IonCard, IonCardHeader, IonCardContent, IonImg } from '@ionic/vue';
-    import { useRouter } from 'vue-router';
-    import { defineComponent, ref, reactive } from 'vue';
+<script setup lang="ts">
+import { ref, reactive } from 'vue';
+import { useRouter } from 'vue-router';
+import { addIcons } from 'ionicons';
+import { helpCircle } from 'ionicons/icons';
 
-    // import { Swiper, SwiperSlide } from 'swiper/vue';
-    import SwiperCore from 'swiper';
-    import { Pagination } from 'swiper/modules';
-    SwiperCore.use([Pagination]);
-    import 'swiper/css';
-    import 'swiper/css/pagination';
-    import 'swiper/css/navigation';
-    // import Calendar from '@/components/Calendar.vue';
+import {
+  IonPage,
+  IonContent,
+  IonToolbar,
+  IonButtons,
+  IonButton,
+  IonCard,
+  IonCardHeader,
+  IonCardContent,
+  IonImg,
+  IonIcon,
+  IonCardTitle
+} from '@ionic/vue';
 
-    export default defineComponent({
-    components: {
-        IonButton,
-        IonCard,
-        IonCardHeader,
-        IonCardContent,
-        IonImg,
-    },
-    setup() {
-        const scrollContainer = ref(null);
-        const cardsContainerStyle = reactive({
-            marginLeft: '12px', // Initial margin based on ion-padding
-            marginRight: '12px',  // Rightmost card will have no padding initially
-        });
-        const router = useRouter();
-        const navigateToLink = (link: string) => {
-            router.push(link);
-        };
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
-        return {
-            scrollContainer,
-            cardsContainerStyle,
-            navigateToLink,
-        };
-    }
+addIcons({
+  'help-circle': helpCircle,
 });
+
+const scrollContainer = ref(null);
+const cardsContainerStyle = reactive({
+  marginLeft: '12px',
+  marginRight: '12px',
+});
+
+const router = useRouter();
+const navigateToLink = (link: string) => {
+  router.push(link);
+};
 </script>
+
 
 <style scoped>
 /* Tailwind CSS classes to hide the scrollbar */

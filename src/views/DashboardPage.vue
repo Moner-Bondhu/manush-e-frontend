@@ -160,35 +160,16 @@ const route = useRoute();
 const scales = ref<any>(null);
 const selectedProfile = ref('');
 
-onMounted(() => {
-    if (typeof router.currentRoute.value.query.profile === 'string') {
-        selectedProfile.value = router.currentRoute.value.query.profile;
-        fetchProfileData(selectedProfile.value);
-    } else {
-        console.log("Something went wrong");
-    }
-});
-
-// Watch for changes in the route query parameter 'profile'
-watch(
-      () => route.query.profile, // Watch the profile query parameter
-      (newProfile, oldProfile) => {
-        if (newProfile !== oldProfile) {
-          // Profile has changed, so refetch the data
-          if (typeof newProfile === 'string') {
-            fetchProfileData(newProfile);
-          } else {
-            console.error('Invalid profile type:', newProfile);
-          }
-        }
-      }
-    );
-
 const fetchProfileData = async (profile: string) => {
   try {
-    const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/scales/${profile}`, 
-            {headers: { Authorization: `Bearer ${localStorage.getItem('api_token')}` },
-        });
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_ENDPOINT}/scales/${profile}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('api_token')}`,
+        },
+      }
+    );
     scales.value = response.data.data;
   } catch (error) {
     console.error('Error fetching profile data:', error);
@@ -196,9 +177,31 @@ const fetchProfileData = async (profile: string) => {
 };
 
 const startScale = (id: number) => {
-    router.push({ name: 'Questions', params: { id: id } });
+  router.push({ name: 'Questions', params: { id } });
 };
+
+onMounted(() => {
+  const profile = router.currentRoute.value.query.profile;
+  if (typeof profile === 'string') {
+    selectedProfile.value = profile;
+    fetchProfileData(profile);
+  } else {
+    console.log('Something went wrong');
+  }
+});
+
+watch(
+  () => route.query.profile,
+  (newProfile, oldProfile) => {
+    if (newProfile !== oldProfile && typeof newProfile === 'string') {
+      fetchProfileData(newProfile);
+    } else if (newProfile !== oldProfile) {
+      console.error('Invalid profile type:', newProfile);
+    }
+  }
+);
 </script>
+
 
 <style scoped>
 

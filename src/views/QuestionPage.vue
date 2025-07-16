@@ -95,7 +95,7 @@
                   :id="`option-${option.id}`" 
                   :value="option.value"
                   :checked="answers[scale.questions[currentQuestionIndex].id]?.includes(option.value)"
-                  @change="toggleMultipleChoiceAnswer(scale.questions[currentQuestionIndex].id, option.value, $event.target.checked)"
+                  @change="if ($event.target) toggleMultipleChoiceAnswer(scale.questions[currentQuestionIndex].id, option.value, ($event.target as HTMLInputElement).checked)"
 
                 />
                 <label class="inline-flex bg-gray-100 text-black px-2 py-2 rounded-lg text-sm transition-colors duration-300 peer-checked:bg-blue-500 peer-checked:text-white cursor-pointer" :for="`option-${option.id}`">{{ option.text }}</label>
@@ -108,7 +108,7 @@
               type="text" 
               class="text-input" 
               v-model="answers[scale.questions[currentQuestionIndex].id]"
-              @input="recordAnswer(scale.questions[currentQuestionIndex].id, $event.target.value)"
+              @input="if ($event.target) recordAnswer(scale.questions[currentQuestionIndex].id, ($event.target as HTMLInputElement).value)"
             />
           </template>
 
@@ -119,7 +119,7 @@
               max="5" 
               step="1" 
               v-model="answers[scale.questions[currentQuestionIndex].id]"
-              @input="recordAnswer(scale.questions[currentQuestionIndex].id, $event.target.value)"
+              @input="if ($event.target) recordAnswer(scale.questions[currentQuestionIndex].id, ($event.target as HTMLInputElement).value)"
             />
           </template>
         </div>
@@ -150,13 +150,12 @@
 <script setup lang="ts">
 import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonContent, IonButton } from '@ionic/vue';
 import { useRouter } from 'vue-router';
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, } from 'vue';
 import axios from 'axios';
 import ProgressBar from '@/components/ProgressBar.vue';
 
 const scale = ref<any>(null);
 const selectedScale = ref();
-const questions = ref([]); // Holds all questions fetched from the API
 const currentQuestionIndex = ref(0);
 const answers = ref<Record<number, any>>({}); // Answers keyed by question ID
 
@@ -169,21 +168,7 @@ interface Option {
   order: number;
 }
 
-interface Question {
-  id: number;
-  text: string;
-  subtext?: string | null;
-  image?: string | null;
-  type: "select_one" | "select_multiple" | "slider" | "text";
-  order: number;
-  options: Option[];
-}
 
-interface Scale {
-  id: number;
-  name: string;
-  questions: Question[];
-}
 
 onMounted(() => {
     if (typeof router.currentRoute.value.params.id === 'string') {
@@ -193,8 +178,6 @@ onMounted(() => {
         console.log("Something went wrong");
     }
 });
-
-const currentQuestion = computed(() => questions.value[currentQuestionIndex.value]);
 
 const fetchScales = async (id: string) => {
   try {
@@ -243,7 +226,7 @@ const sendAnswer = async () => {
         payload = { numeric_answer: answer }
     }
     console.log(payload);
-    const response = await axios.post(
+    await axios.post(
         `${import.meta.env.VITE_API_ENDPOINT}/question/respond/${currentQuestion.id}`,
         payload,
         { headers: { Authorization: `Bearer ${localStorage.getItem('api_token')}` } }

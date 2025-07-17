@@ -116,6 +116,7 @@
           </ion-button>
           <ion-button
             @click="nextQuestion"
+            :disabled="!isAnswerValid()"
             style="--background: #FF4D4D;"
             class="text-base font-light tracking-normal">
             পরবর্তি
@@ -137,6 +138,28 @@ const scale = ref<any>(null);
 const selectedScale = ref();
 const currentQuestionIndex = ref(0);
 const answers = ref<Record<number, any>>({});
+
+const isAnswerValid = () => {
+  const currentQuestion = scale.value?.questions[currentQuestionIndex.value];
+  if (!currentQuestion) return false;
+  const answer = answers.value[currentQuestion.id];
+
+  if (currentQuestion.type === 'select_one') {
+    return answer !== undefined && answer !== null;
+  }
+  if (currentQuestion.type === 'select_multiple') {
+    return Array.isArray(answer) && answer.length > 0;
+  }
+  if (currentQuestion.type === 'text') {
+    return typeof answer === 'string' && answer.trim() !== '';
+  }
+  if (currentQuestion.type === 'slider') {
+    return answer !== undefined && answer !== null;
+  }
+
+  return false;
+};
+
 
 interface Option {
   id: number;

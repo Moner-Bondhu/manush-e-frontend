@@ -56,7 +56,7 @@
                     </div>
 
                     <!-- Horizontally Scrollable Cards with Fading Effect -->
-                    <div class="relative flex overflow-x-auto py-2 scrollbar-hidden" ref="scrollContainer">
+                    <div class="relative flex overflow-x-auto py-2 scrollbar-hidden scroll-section">
                         <!-- Cards Container -->
                         <div :style="cardsContainerStyle" class="flex">
                             <!-- Card 1 -->
@@ -120,7 +120,7 @@
                     </div>
 
                     <!-- Horizontally Scrollable Cards with Fading Effect -->
-                    <div class="relative flex overflow-x-auto py-2 scrollbar-hidden" ref="scrollContainer">
+                    <div class="relative flex overflow-x-auto py-2 scrollbar-hidden scroll-section">
                         <!-- Cards Container -->
                         <div :style="cardsContainerStyle" class="flex">
                             <!-- Card 1 -->
@@ -278,7 +278,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
+import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { addIcons } from 'ionicons';
 import { helpCircle } from 'ionicons/icons';
@@ -305,7 +305,6 @@ addIcons({
   'help-circle': helpCircle,
 });
 
-const scrollContainer = ref(null);
 const cardsContainerStyle = reactive({
   marginLeft: '12px',
   marginRight: '12px',

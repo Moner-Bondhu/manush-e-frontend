@@ -29,28 +29,33 @@
                 </div> -->
 
                 <div class="flex flex-col gap-8">
-                    <div class=" w-2/3 shadow min-h-[150px] rounded-lg mx-auto border p-3" 
-                        @click="selectProfile('child')">
+                    <button
+                        type="button"
+                        class="w-2/3 shadow min-h-[150px] rounded-lg mx-auto border p-3"
+                        @click="selectProfile('child')"
+                    >
                         <div class="c items-center justify-center">
-                            <ion-img src="/Children.png" class="w-[70px] mx-auto "></ion-img>
+                        <ion-img src="/Children.png" class="w-[70px] mx-auto "></ion-img>
                         </div>
                         <div class="">
-                            <h2 class="text-lg my-0 text-red-600 font-semibold  text-center">সন্তান</h2>
-                            <p class="font-poppins-regular text-xs text-center" id="childName">{{ childName }}</p>
+                        <h2 class="text-lg my-0 text-red-600 font-semibold text-center">সন্তান</h2>
+                        <p class="font-poppins-regular text-xs text-center" id="childName">{{ childName }}</p>
                         </div>
+                    </button>
 
-                    </div>
-                    <div class=" gap-4  w-2/3 shadow min-h-[150px] rounded-lg mx-auto  border  p-3"
-                        @click="selectProfile('parent')">
+                    <button
+                        type="button"
+                        class="gap-4 w-2/3 shadow min-h-[150px] rounded-lg mx-auto border p-3"
+                        @click="selectProfile('parent')"
+                    >
                         <div class="p items-center justify-center">
-                            <ion-img src="/Parents.png" class="w-[70px] mx-auto "></ion-img>
+                        <ion-img src="/Parents.png" class="w-[70px] mx-auto "></ion-img>
                         </div>
-                        <div class="col-span-3 ">
-                            <h2 class="text-lg my-0 text-red-600 font-semibold text-center">অভিভাবক</h2>
-                            <p class="font-poppins-regular text-xs text-center" id="parentName">{{ parentName }}</p>
+                        <div class="col-span-3">
+                        <h2 class="text-lg my-0 text-red-600 font-semibold text-center">অভিভাবক</h2>
+                        <p class="font-poppins-regular text-xs text-center" id="parentName">{{ parentName }}</p>
                         </div>
-
-                    </div>
+                    </button>
                 </div>
             </section>
 
@@ -63,6 +68,7 @@ import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 import { IonPage, IonContent, IonImg } from '@ionic/vue';
+
 
 interface Demography {
   id: number;

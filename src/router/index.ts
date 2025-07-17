@@ -1,3 +1,5 @@
+
+
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 
@@ -42,9 +44,12 @@ const routes: Array<RouteRecordRaw> = [
   }
 ];
 
+export const routeList: Array<RouteRecordRaw> = routes; // your existing routes
+
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes
+  routes: routeList
 });
 
 router.beforeEach((to, from, next) => {

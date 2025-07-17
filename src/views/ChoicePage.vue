@@ -29,28 +29,33 @@
                 </div> -->
 
                 <div class="flex flex-col gap-8">
-                    <div class=" w-2/3 shadow min-h-[150px] rounded-lg mx-auto border p-3" 
-                        @click="selectProfile('child')">
+                    <button
+                        type="button"
+                        class="w-2/3 shadow min-h-[150px] rounded-lg mx-auto border p-3"
+                        @click="selectProfile('child')"
+                    >
                         <div class="c items-center justify-center">
-                            <ion-img src="/Children.png" class="w-[70px] mx-auto "></ion-img>
+                        <ion-img src="/Children.png" class="w-[70px] mx-auto "></ion-img>
                         </div>
                         <div class="">
-                            <h2 class="text-lg my-0 text-red-600 font-semibold  text-center">সন্তান</h2>
-                            <p class="font-poppins-regular text-xs text-center" id="childName">{{ childName }}</p>
+                        <h2 class="text-lg my-0 text-red-600 font-semibold text-center">সন্তান</h2>
+                        <p class="font-poppins-regular text-xs text-center" id="childName">{{ childName }}</p>
                         </div>
+                    </button>
 
-                    </div>
-                    <div class=" gap-4  w-2/3 shadow min-h-[150px] rounded-lg mx-auto  border  p-3"
-                        @click="selectProfile('parent')">
+                    <button
+                        type="button"
+                        class="gap-4 w-2/3 shadow min-h-[150px] rounded-lg mx-auto border p-3"
+                        @click="selectProfile('parent')"
+                    >
                         <div class="p items-center justify-center">
-                            <ion-img src="/Parents.png" class="w-[70px] mx-auto "></ion-img>
+                        <ion-img src="/Parents.png" class="w-[70px] mx-auto "></ion-img>
                         </div>
-                        <div class="col-span-3 ">
-                            <h2 class="text-lg my-0 text-red-600 font-semibold text-center">অভিভাবক</h2>
-                            <p class="font-poppins-regular text-xs text-center" id="parentName">{{ parentName }}</p>
+                        <div class="col-span-3">
+                        <h2 class="text-lg my-0 text-red-600 font-semibold text-center">অভিভাবক</h2>
+                        <p class="font-poppins-regular text-xs text-center" id="parentName">{{ parentName }}</p>
                         </div>
-
-                    </div>
+                    </button>
                 </div>
             </section>
 
@@ -59,15 +64,11 @@
 </template>
 
 <script setup lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonContent, IonButton } from '@ionic/vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { ref } from 'vue';
 import axios from 'axios';
+import { IonPage, IonContent, IonImg } from '@ionic/vue';
 
-const router = useRouter();
-const childName = ref('');
-const parentName = ref('');
-const user = ref({});
 
 interface Demography {
   id: number;
@@ -87,44 +88,39 @@ interface Profile {
   demography: Demography;
 }
 
-async function fetchData() {  
+const router = useRouter();
+const childName = ref('');
+const parentName = ref('');
+
+const fetchData = async () => {
   try {
-    // replace `getPost` with your data fetching util / API wrapper
     const response = await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/user`, {
-            headers: { Authorization: `Bearer ${localStorage.getItem('api_token')}` },
+      headers: { Authorization: `Bearer ${localStorage.getItem('api_token')}` },
     });
 
-    // Find the child and parent profiles from the response
     const childProfile = response.data.data.profiles.find((profile: Profile) => profile.type === 'child');
     const parentProfile = response.data.data.profiles.find((profile: Profile) => profile.type === 'parent');
 
-
-
-    // Set the names to the corresponding variables if profiles are found
     if (childProfile) {
-        childName.value = childProfile.full_name;
+      childName.value = childProfile.full_name;
     }
 
     if (parentProfile) {
-        parentName.value = parentProfile.full_name;
+      parentName.value = parentProfile.full_name;
     }
   } catch (err) {
     console.log(err);
-  } 
-}
+  }
+};
 
 const selectProfile = (profile: string) => {
-  // Redirect to the scale page with the selected profile as a query parameter
   router.push({ name: 'Dashboard', query: { profile } });
 };
 
-const navigateToBoxB = () => {
-    router.push('/boxB');
-};
-
-fetchData();
-
+onMounted(fetchData);
 </script>
+
+
 
 <style scoped>
 
@@ -138,3 +134,5 @@ ion-button {
     --padding-bottom: 20px;
 }
 </style>
+
+

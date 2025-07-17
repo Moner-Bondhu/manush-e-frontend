@@ -16,6 +16,28 @@ This is the frontend of the **Manush-E** application, built using **Ionic + Vue 
 
 ---
 
+## ✅ Test Coverage Report
+| File / Directory                      | % Stmts   | % Branch  | % Funcs   | % Lines   | Uncovered Lines                                     |
+| ------------------------------------- | --------- | --------- | --------- | --------- | --------------------------------------------------- |
+| **All files**                         | **84.95** | **89.62** | **66.66** | **84.95** |                                                     |
+| `capacitor.config.ts`                 | 0.00      | 100.00    | 100.00    | 0.00      | 3–9                                                 |
+| `src/App.vue`                         | 0.00      | 0.00      | 0.00      | 0.00      | 1–8                                                 |
+| `src/main.ts`                         | 0.00      | 0.00      | 0.00      | 0.00      | 1–46                                                |
+| `src/components/Calendar.vue`         | 0.00      | 0.00      | 0.00      | 0.00      | 1–37                                                |
+| `src/components/ExploreContainer.vue` | 0.00      | 0.00      | 0.00      | 0.00      | 1–5                                                 |
+| `src/components/ProgressBar.vue`      | 100.00    | 100.00    | 100.00    | 100.00    |                                                     |
+| `src/router/index.ts`                 | 64.00     | 100.00    | 37.50     | 64.00     | 56–87                                               |
+| `src/views/ChoicePage.vue`            | 96.82     | 88.88     | 100.00    | 96.82     | 112–113                                             |
+| `src/views/DashboardPage.vue`         | 96.07     | 85.00     | 100.00    | 96.07     | 189–190, 199–200                                    |
+| `src/views/HomePage.vue`              | 98.96     | 100.00    | 0.00      | 98.96     | 315–316                                             |
+| `src/views/LoginPage.vue`             | 80.89     | 85.71     | 66.66     | 80.89     | 74–75, 77–79, 84–95                                 |
+| `src/views/OnboardingPage.vue`        | 100.00    | 97.70     | 73.33     | 100.00    | 231, 255                                            |
+| `src/views/OtpPage.vue`               | 94.23     | 87.50     | 50.00     | 94.23     | 58–60                                               |
+| `src/views/ParentPage.vue`            | 0.00      | 0.00      | 0.00      | 0.00      | 1–29                                                |
+| `src/views/QuestionPage.vue`          | 87.05     | 82.25     | 83.33     | 87.05     | 160, 179–180, 190–191, 213–214, 227–229, 235–236... |
+
+
+
 ## 📦 Project Setup
 
 ### 1. Clone the Repository

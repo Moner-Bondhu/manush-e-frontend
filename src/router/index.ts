@@ -41,6 +41,16 @@ const routes: Array<RouteRecordRaw> = [
     path: '/scale/:id',
     name: 'Questions',
     component: () => import('@/views/QuestionPage.vue') // Page for Box A
+  },
+  {
+    path: '/start-chat',
+    name: 'StartChat',
+    component: () => import('@/views/StartChat.vue'),
+  },
+  {
+    path: '/chat',
+    name: 'ChatPage',
+    component: () => import('@/views/ChatPage.vue'),
   }
 ];
 

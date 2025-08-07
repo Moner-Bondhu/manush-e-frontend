@@ -45,104 +45,26 @@ const messages = ref<ChatMessage[]>([
   {
     id: 1,
     sender_type: "ai",
-    message: "Hey there 👋 How are you feeling today?",
-    created_at: "2025-08-07T10:00:00Z",
-    options: ["Great", "Okay", "Not good"]
+    message: "তোমার ওয়েল-বিয়িং স্কোর ৮৯%। এটি ইঙ্গিত করে যে তুমি হয়তো দুশ্চিন্তা বা মানসিক চাপ অনুভব করছো। এভাবে অনুভব করাটা একদম স্বাভাবিক—তোমার অনুভূতিগুলো সত্যি, এবং তুমি একা নও।",
+    created_at: "2025-08-07T12:00:00Z"
   },
   {
     id: 2,
-    sender_type: "user",
-    message: "Not good",
-    created_at: "2025-08-07T10:00:12Z"
+    sender_type: "ai",
+    message: "আমরা তোমার জন্য কিছু ব্যক্তিগত সেল্ফ-কেয়ার এক্টিভিটি ও মানসিক সুস্থতার টুলস তৈরি করেছি যা আমাদের হোমপেজে পাবে।",
+    created_at: "2025-08-07T12:00:04Z"
   },
   {
     id: 3,
-    sender_type: "ai",
-    message: "I'm really sorry to hear that. Want to do a quick 1-minute mood check-in?",
-    created_at: "2025-08-07T10:00:14Z",
-    options: ["Sure", "Maybe later"]
+    sender_type: "user",
+    message: "আমি কীভাবে কাউন্সেলিং নিতে পারি?",
+    created_at: "2025-08-07T12:02:09Z"
   },
   {
     id: 4,
-    sender_type: "user",
-    message: "Sure",
-    created_at: "2025-08-07T10:00:17Z"
-  },
-  {
-    id: 5,
     sender_type: "ai",
-    message: "Okay, on a scale of 1 to 10, how would you rate your mood right now? (1 = lowest, 10 = best)",
-    created_at: "2025-08-07T10:00:20Z"
-  },
-  {
-    id: 6,
-    sender_type: "user",
-    message: "3",
-    created_at: "2025-08-07T10:00:25Z"
-  },
-  {
-    id: 7,
-    sender_type: "ai",
-    message: "Thanks for sharing. It seems like you're having a tough day 💔",
-    created_at: "2025-08-07T10:00:28Z"
-  },
-  {
-    id: 8,
-    sender_type: "ai",
-    message: "Do you want to talk about what’s been bothering you? Or would you like to try a quick grounding exercise together?",
-    created_at: "2025-08-07T10:00:30Z",
-    options: ["Talk", "Try exercise"]
-  },
-  {
-    id: 9,
-    sender_type: "user",
-    message: "Try exercise",
-    created_at: "2025-08-07T10:00:34Z"
-  },
-  {
-    id: 10,
-    sender_type: "ai",
-    message: "Great choice. Let's do a simple breathing technique 🧘",
-    created_at: "2025-08-07T10:00:36Z"
-  },
-  {
-    id: 11,
-    sender_type: "ai",
-    message: "Breathe in for 4 seconds... hold for 4... and out for 6. Let’s do this for 4 rounds. Ready?",
-    created_at: "2025-08-07T10:00:38Z",
-    options: ["Ready", "Not now"]
-  },
-  {
-    id: 12,
-    sender_type: "user",
-    message: "Ready",
-    created_at: "2025-08-07T10:00:40Z"
-  },
-  {
-    id: 13,
-    sender_type: "ai",
-    message: "Awesome. 🌬️ Inhale... Hold... Exhale...\n\n(Repeats quietly for 4 rounds...)",
-    created_at: "2025-08-07T10:00:42Z"
-  },
-  {
-    id: 14,
-    sender_type: "ai",
-    message: "Well done. That was a quick reset. 💆‍♀️ How are you feeling now?",
-    created_at: "2025-08-07T10:00:47Z",
-    options: ["Better", "Same", "Worse"]
-  },
-  {
-    id: 15,
-    sender_type: "user",
-    message: "Better",
-    created_at: "2025-08-07T10:00:49Z"
-  },
-  {
-    id: 16,
-    sender_type: "ai",
-    message: "That’s really good to hear 😊 Would you like a small reflection journal prompt or a mood tracker link?",
-    created_at: "2025-08-07T10:00:51Z",
-    options: ["Journal", "Tracker", "No thanks"]
+    message: "তুমি অ্যাপ থেকে বা আমাদের পেশাদার হেল্পলাইন নম্বরে কল করে কাউন্সেলিং সেবা নিতে পারো। আমাদের পেশাদার হেল্পলাইন নম্বর +8801776-632344",
+    created_at: "2025-08-07T12:02:12Z"
   }
 ])
 

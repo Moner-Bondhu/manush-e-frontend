@@ -1,5 +1,6 @@
 /* For information on how to create your own theme, please see:
 http://ionicframework.com/docs/theming/ */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300..900&display=swap');
 
 body {
     font-family: 'LiAdorNoirritVR', sans-serif !important;
@@ -82,7 +83,6 @@ body {
     font-style: italic;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300..900&display=swap');
 
 
 /* Poppins font classes for various weights */

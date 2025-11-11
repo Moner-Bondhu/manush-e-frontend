@@ -53,7 +53,7 @@ npm run preview
 
 ### Unit/Component Tests
 ```bash
-npm run test
+npm run test:unit
 ```
 
 ### Linting

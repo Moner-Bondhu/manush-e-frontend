@@ -40,7 +40,7 @@
       </ion-toolbar>
 
       <!-- Profile details -->
-      <section id="profile details" class="flex h-auto px-5">
+      <section id="profile-details" class="flex h-auto px-5">
         <div class="flex items-center rounded-lg w-full">
           <img
             src="/profile.png"

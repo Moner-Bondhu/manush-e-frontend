@@ -41,6 +41,47 @@ const routes: Array<RouteRecordRaw> = [
     path: '/scale/:id',
     name: 'Questions',
     component: () => import('@/views/QuestionPage.vue') // Page for Box A
+  },
+// add child and parent dashboard routes
+  {
+    path: '/child-dashboard',
+    name: 'ChildDashboard',
+    component: () => import('@/views/ChildDashboardPage.vue') // Child Dashboard Page
+  },
+  { 
+    path: '/parent-dashboard',
+    name: 'ParentDashboard',
+    component: () => import('@/views/ParentDashboardPage.vue') // Parent Dashboard Page
+  },
+  {
+    path: '/growth',
+    name: 'Growth',
+    component: () => import('@/views/GrowthPage.vue') // Growth Page
+  },
+  {
+    path: '/ai-chat',
+    name: 'AIChat',
+    component: () => import('@/views/AIChat.vue') // AI Chat Page
+  },
+  {
+    path: '/activity/balloon',
+    name: 'BalloonActivity',
+    component: () => import('@/views/MagicBalloonActivity.vue') // Balloon Activity Page
+  },
+  {
+    path: '/activity/five-fingers',
+    name: 'FiveFingersActivity',
+    component: () => import('@/views/FiveFingersActivity.vue') // Five Fingers Activity Page
+  },
+  {
+    path: '/activity/memory-master',
+    name: 'MemoryMasterGame',
+    component: () => import('@/views/MemoryMasterGame.vue') // Memory Master Activity Page
+  },
+  {
+    path: '/counseling',
+    name: 'Counseling',
+    component: () => import('@/views/CounselingPage.vue') // Counseling Page
   }
 ];
 
@@ -84,6 +125,30 @@ router.beforeEach((to, from, next) => {
       next(); // Allow access to the login page
     }
   }
+
+if (to.path === '/dashboard') {
+  const profile = localStorage.getItem('selectedProfile');
+  const childName = localStorage.getItem('childName');
+  const parentName = localStorage.getItem('parentName');
+
+  if (profile === 'child') {
+    return next({
+      name: 'ChildDashboard',
+      query: { name: childName || '' }
+    });
+  }
+
+  if (profile === 'parent') {
+    return next({
+      name: 'ParentDashboard',
+      query: { name: parentName || '' }
+    });
+  }
+
+  return next(); // no profile selected
+}
+
+ 
 });
 export default router;
 

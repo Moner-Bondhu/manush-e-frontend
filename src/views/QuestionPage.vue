@@ -408,8 +408,23 @@ const sendAnswer = async () => {
 };
 
 const submitAnswers = async () => {
+  // 1. SIMULATION: Save progress to LocalStorage
+  // In a real app, the API would return the new level, or we fetch it again.
+  const currentProgress = parseInt(localStorage.getItem('userMissionProgress') || '0');
+  localStorage.setItem('userMissionProgress', (currentProgress + 1).toString());
+
+  console.log("Mission Completed! Level Up.");
+
+  // 2. Redirect to Dashboard
+  // We pass a query param 'refresh' so dashboard knows something changed
   const profile = scale.value.visible_to;
-  router.push({ name: "Dashboard", query: { profile, refresh: Date.now() } });
+  // router.push({ name: "Dashboard", query: { profile, refresh: Date.now() } });
+  // router push to /child-dashboard or /parent-dashboard based on profile
+  if (profile === 'child') {
+    router.push({ name: "ChildDashboard", query: { refresh: Date.now() } });
+  } else if (profile === 'parent') {
+    router.push({ name: "ParentDashboard", query: { refresh: Date.now() } });
+  }
 };
 </script>
 

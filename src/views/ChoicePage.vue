@@ -113,9 +113,26 @@ const fetchData = async () => {
   }
 };
 
-const selectProfile = (profile: string) => {
-  router.push({ name: 'Dashboard', query: { profile } });
+
+const selectProfile = (profileType: string) => {
+  // save which profile was picked
+  localStorage.setItem('selectedProfile', profileType);
+
+  if (profileType === 'child') {
+    localStorage.setItem('childName', childName.value);
+    router.push({
+      name: 'ChildDashboard',
+      query: { name: childName.value },
+    });
+  } else if (profileType === 'parent') {
+    localStorage.setItem('parentName', parentName.value);
+    router.push({
+      name: 'ParentDashboard',
+      query: { name: parentName.value },
+    });
+  }
 };
+
 
 onMounted(fetchData);
 </script>

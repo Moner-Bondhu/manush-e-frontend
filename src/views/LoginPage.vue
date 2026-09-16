@@ -59,7 +59,6 @@ const isTestAuthEnabled = import.meta.env.MODE === 'development' && import.meta.
 
 
 const handleSubmit = async () => {
-    console.log(import.meta.env);
     if(!phoneNumber.value){
         alert('Please enter a number!') // TODO: Replace with error handling
     } else {

@@ -149,7 +149,7 @@ describe('QuestionPage.vue', () => {
     await flushPromises()
 
     // Q3
-    const input = wrapper.find('input[type="text"]')
+    const input = wrapper.find('textarea')
     expect(input.exists()).toBe(true)
     await input.setValue('Test comment')
 

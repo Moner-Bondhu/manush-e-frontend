@@ -16,7 +16,7 @@
 
       <div class="flex flex-row max-w-full gap-5">
         <ProgressBar v-if="scale" :number="currentQuestionIndex + 1" :maxStars="scale.questions.length" />
-        <div>
+        <div v-if="scale">
           <p class="ml-auto text-sm font-regular text-white w-fit h-7 bg-[#FF5D5D] px-2 py-1 rounded-lg text-nowrap inline-flex items-center">
             <svg :width="16" :height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-1">
               <path

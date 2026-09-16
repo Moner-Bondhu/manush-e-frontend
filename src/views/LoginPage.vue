@@ -55,6 +55,7 @@ import axios from 'axios';
 const phoneNumber = ref('');
 const router = useRouter();
 const deferredPrompt = ref<any>(null);
+const isTestAuthEnabled = import.meta.env.MODE === 'development' && import.meta.env.VITE_ENABLE_TEST_AUTH === 'true';
 
 
 const handleSubmit = async () => {
@@ -62,6 +63,12 @@ const handleSubmit = async () => {
     if(!phoneNumber.value){
         alert('Please enter a number!') // TODO: Replace with error handling
     } else {
+        if (isTestAuthEnabled) {
+          localStorage.setItem('phoneNumber', `+88${phoneNumber.value}`);
+          router.push('/send-otp');
+          return;
+        }
+
         try {
         const response = await axios.post(
           `${import.meta.env.VITE_API_ENDPOINT}/login`,

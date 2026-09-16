@@ -26,6 +26,18 @@
 
             <h3 class="text-2xl font-semibold my-0">জানুয়ারি</h3>
             <p class="text-base font-regular text-gray-500 mt-1">এই মাসে তোমার জন্য আছে</p>
+            <button
+                type="button"
+                class="focus-lab-link mt-5 w-full text-left"
+                @click="router.push({ name: 'GameLibrary', query: { profile: selectedProfile } })"
+            >
+                <span class="focus-lab-icon" aria-hidden="true">*</span>
+                <span>
+                    <strong>Focus Lab</strong>
+                    <small>ছোট মনোযোগের খেলা - কোনও পরীক্ষা বা স্কোর নয়</small>
+                </span>
+                <span class="focus-lab-arrow" aria-hidden="true">&#8594;</span>
+            </button>
             <ol class="relative text-gray-500 border-s border-gray-200 mt-8 m-4">
                 <li class="mb-10 ms-6">
                     <span
@@ -204,5 +216,48 @@ watch(
 
 
 <style scoped>
+.focus-lab-link {
+    align-items: center;
+    background: linear-gradient(130deg, #fff6dd, #e5f7ef);
+    border: 1px solid #d8c486;
+    border-radius: 20px;
+    color: #19372d;
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+}
+
+.focus-lab-link strong,
+.focus-lab-link small {
+    display: block;
+}
+
+.focus-lab-link strong {
+    font-size: 1.1rem;
+}
+
+.focus-lab-link small {
+    color: #52675d;
+    font-size: .82rem;
+    margin-top: 3px;
+}
+
+.focus-lab-icon {
+    align-items: center;
+    background: #1f6b50;
+    border-radius: 50%;
+    color: #fff;
+    display: inline-flex;
+    font-family: Georgia, serif;
+    font-size: 1.6rem;
+    height: 42px;
+    justify-content: center;
+    width: 42px;
+}
+
+.focus-lab-arrow {
+    font-size: 1.5rem;
+    margin-left: auto;
+}
 
 </style>

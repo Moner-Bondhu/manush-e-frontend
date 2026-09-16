@@ -24,7 +24,7 @@
                 fill="white" stroke="white">
               </path>
             </svg>
-            তোমার পয়েন্ট: {{ toBangla(currentQuestionIndex + 1) }}
+            অগ্রগতি: {{ toBangla(currentQuestionIndex + 1) }}/{{ toBangla(scale.questions.length) }}
           </p>
         </div>
       </div>
@@ -86,12 +86,14 @@
           </template>
 
           <template v-else-if="scale.questions[currentQuestionIndex].type === 'text'">
-            <input
-              type="text"
+            <textarea
               class="text-input"
               v-model="answers[scale.questions[currentQuestionIndex].id]"
               @input="onTextInput($event, scale.questions[currentQuestionIndex].id)"
-            />
+              maxlength="500"
+              rows="6"
+              placeholder="তোমার উত্তর এখানে লিখো... / Write your answer here..."
+            ></textarea>
           </template>
 
           <template v-else-if="scale.questions[currentQuestionIndex].type === 'slider'">
@@ -268,3 +270,23 @@ function toBangla(num: number): string {
   return num.toString().split('').map((digit: string) => banglaNumbers[parseInt(digit)]).join('');
 }
 </script>
+
+<style scoped>
+.text-input {
+  background: #fff7f4;
+  border: 2px solid #ffc9c9;
+  border-radius: 16px;
+  box-sizing: border-box;
+  font: inherit;
+  line-height: 1.5;
+  min-height: 150px;
+  padding: 16px;
+  resize: vertical;
+  width: 100%;
+}
+
+.text-input:focus {
+  border-color: #ff5d5d;
+  outline: none;
+}
+</style>

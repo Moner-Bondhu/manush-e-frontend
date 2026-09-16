@@ -1,31 +1,3 @@
-<template>
-    <ion-page>
-        <ion-header class="">
-            <ion-toolbar class="">
-                <ion-buttons slot="">
-                    <ion-back-button default-href="/"></ion-back-button>
-                    <!-- <ion-img src="/public/mb-logo.svg" class="w-[70px] mx-auto "></ion-img> -->
-                </ion-buttons>
-            </ion-toolbar>
-        </ion-header>
-        <ion-content :fullscreen="true" class="ion-padding">
-
-
-
-            <div class="w-full p-3 border border-gray-200 rounded-lg shadow">
-                <h2 class="text-lg my-0">Title</h2>
-                <p class="text-xs">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illum iusto ratione odit
-                    est, repellendus
-                    error modi possimus rem incidunt animi ea blanditiis itaque asperiores facere commodi, obcaecati ab
-                    aliquid in!</p>
-            </div>
-
-
-        </ion-content>
-    </ion-page>
-</template>
-
-<script setup lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonContent, } from '@ionic/vue';
-
-</script>
+<template><ion-page><ion-content><main class="portal"><header><button @click="router.push('/choice')">Back</button><p>MANUSH-E / FAMILY</p></header><section class="hero"><p>FAMILY SPACE</p><h1>Small steps.<br>Shared growth.</h1><span>Connected activities, practice, and reflections in one place.</span></section><p v-if="loading">Loading your family overview...</p><section v-else-if="summary" class="grid"><article class="profile"><span>{{ summary.name.slice(0,1) }}</span><div><p>CHILD JOURNEY</p><h2>{{ summary.name }}</h2><small>{{ summary.completed_activities }} of {{ summary.total_activities }} activity packs complete</small></div></article><article><p>ACTIVITY PATH</p><div v-for="activity in summary.activities" :key="activity.id" class="row"><span>{{ activity.name }}</span><b>{{ activity.responses }}/{{ activity.total }}</b></div></article><article><p>PLAY PRACTICE</p><div v-for="signal in summary.play_signals" :key="signal.domain" class="row"><span>{{ label(signal.domain) }}</span><b>{{ signal.observations }} observations</b></div><small v-if="!summary.play_signals.length">Play a game to begin a practice record.</small></article><article><p>RECENT PLAY</p><div v-for="game in summary.recent_game_sessions" :key="game.id" class="row"><span>Game session</span><b>{{ Math.round(game.duration_ms / 1000) }}s</b></div></article></section></main></ion-content></ion-page></template>
+<script setup lang="ts">import{onMounted,ref}from'vue';import{IonContent,IonPage}from'@ionic/vue';import{useRouter}from'vue-router';import axios from'axios';const router=useRouter(),loading=ref(true),summary=ref<any>(null);const labels:Record<string,string>={attention:'Focus practice',working_memory:'Memory practice',planning:'Planning practice',timing:'Rhythm practice'};const label=(domain:string)=>labels[domain]||domain;onMounted(async()=>{try{const r=await axios.get(`${import.meta.env.VITE_API_ENDPOINT}/portal/parent`,{headers:{Authorization:`Bearer ${localStorage.getItem('api_token')}`}});summary.value=r.data.data;}finally{loading.value=false;}});</script>
+<style scoped>.portal{background:#f4f0e7;color:#1b3631;min-height:100%;padding:22px max(22px,calc((100vw - 920px)/2))}header{display:flex;justify-content:space-between}header button{background:transparent;border:0;color:inherit}.hero{background:linear-gradient(125deg,#1f6b50,#8fc5a4);border-radius:28px;color:#fff;padding:35px;margin:22px 0}.hero p,article>p{font:700 .72rem Georgia,serif;letter-spacing:.12em}.hero h1{font:400 clamp(2.8rem,10vw,5rem)/.9 Georgia,serif;margin:12px 0 18px}.grid{display:grid;gap:15px}.grid article{background:#fffdf8;border-radius:20px;padding:20px}.profile{align-items:center;display:flex;gap:16px}.profile>span{align-items:center;background:#f0bf68;border-radius:50%;display:flex;font:2rem Georgia,serif;height:65px;justify-content:center;width:65px}.profile h2{font:400 2rem Georgia,serif;margin:3px 0}.row{border-top:1px solid #ece3d3;display:flex;justify-content:space-between;padding:12px 0}.row b{color:#35745a}@media(min-width:760px){.grid{grid-template-columns:1fr 1fr}.profile{grid-column:span 2}}</style>

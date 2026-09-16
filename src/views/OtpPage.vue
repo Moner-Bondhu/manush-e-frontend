@@ -11,6 +11,9 @@
 
                         <p class="text-sm font-regular text-center">আপনার ফোনে পাঠানো <span class="text-red-600">ও.টি.পি</span> দিয়ে লগিন করুন
                         </p>
+                        <p v-if="isTestAuthEnabled" class="mt-2 text-xs text-center text-gray-500">
+                            Local test code: {{ testOtp }}
+                        </p>
                         <form @submit.prevent="handleSubmit" class="flex flex-col mt-4">
 
 
@@ -36,21 +39,35 @@ import axios from 'axios';
 const phoneNumber = localStorage.getItem('phoneNumber');
 const otp = ref('');
 const router = useRouter();
+const isTestAuthEnabled = import.meta.env.MODE === 'development' && import.meta.env.VITE_ENABLE_TEST_AUTH === 'true';
+const testOtp = import.meta.env.VITE_TEST_OTP || '1234';
+
+const completeLogin = (token: string, user: unknown) => {
+  localStorage.setItem('api_token', token);
+  localStorage.setItem('user', JSON.stringify(user));
+  localStorage.removeItem('phoneNumber');
+  router.push('/choice');
+};
 
 const handleSubmit = async () => {
     if(!otp.value){
         alert('Please enter OTP!') // TODO: Replace with error handling
     } else {
+        if (isTestAuthEnabled && otp.value === testOtp) {
+          completeLogin(import.meta.env.VITE_TEST_API_TOKEN || 'local-test-token', {
+            name: 'Local Test User',
+            is_onboarded: true,
+          });
+          return;
+        }
+
         try {
         const response = await axios.post(
           `${import.meta.env.VITE_API_ENDPOINT}/otp`,
           { phoneNumber: phoneNumber, otp: otp.value }
         );
         if (response.data.success) {
-          localStorage.setItem('api_token', response.data.data.token);
-          localStorage.setItem('user', JSON.stringify(response.data.data.user));
-          localStorage.removeItem('phoneNumber');
-          router.push('/choice');
+          completeLogin(response.data.data.token, response.data.data.user);
         } else {
           alert('Failed to verify OTP. Try again.'); // TODO: Replace with error handling
         }

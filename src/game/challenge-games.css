@@ -1,0 +1,12 @@
+.challenge.sky { background: linear-gradient(145deg, #1762a0, #78c9de); }
+.challenge.pet { background: linear-gradient(145deg, #a93e62, #efaa75); }
+.sky-scene { background: linear-gradient(#74c6e4 0%, #d9f3ee 72%, #88be83 73%); border-radius: 20px; display: grid; gap: 10px; grid-template-columns: repeat(2, 1fr); min-height: 220px; padding: 24px; position: relative; }
+.sky-item { background: #ffffffbd; border: 0; border-radius: 18px; color: #164c68; cursor: pointer; font: 1.15rem Georgia, serif; min-height: 64px; position: relative; z-index: 1; }
+.cloud { background: #fff; border-radius: 50%; height: 38px; opacity: .6; position: absolute; width: 85px; }
+.c1 { left: 8%; top: 13%; }
+.c2 { right: 8%; top: 34%; }
+.pet-scene { background: linear-gradient(145deg, #ffe6bd, #b6d998); border-radius: 20px; font-size: 7rem; height: 155px; line-height: 155px; position: relative; }
+.pet-scene i { color: #e65d70; font-size: 1.6rem; position: absolute; right: 27%; top: 18px; }
+.story { font: 1.1rem/1.5 Georgia, serif; margin: 22px auto 8px; max-width: 390px; }
+.pet-choices { display: grid; gap: 10px; }
+.pet-choices button { background: #f9dfbb; border: 0; border-radius: 15px; color: #183b40; cursor: pointer; font: 1rem Georgia, serif; padding: 15px; }

@@ -38,9 +38,29 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/ParentPage.vue') // Page for Box B
   },
   {
+    path: '/teacher',
+    component: () => import('@/views/TeacherPage.vue')
+  },
+  { path: '/scenario-studio', component: () => import('@/views/ScenarioStudioPage.vue') },
+  {
     path: '/scale/:id',
     name: 'Questions',
     component: () => import('@/views/QuestionPage.vue') // Page for Box A
+  },
+  {
+    path: '/focus-lab',
+    name: 'FocusLab',
+    component: () => import('@/views/FocusLabPage.vue')
+  },
+  {
+    path: '/play',
+    name: 'GameLibrary',
+    component: () => import('@/views/GameLibraryPage.vue')
+  },
+  {
+    path: '/games/:slug',
+    name: 'GameChallenge',
+    component: () => import('@/views/GameChallengePage.vue')
   }
 ];
 
@@ -53,10 +73,17 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const apiToken = localStorage.getItem('api_token'); // Check for an existing API token
+  let apiToken = localStorage.getItem('api_token'); // Check for an existing API token
   const phoneNumber = localStorage.getItem('phoneNumber'); // Check if phone number exists
-  const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') || '{}') : null;
+  let user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user') || '{}') : null;
 
+  // Remove the earlier frontend-only placeholder so local testing uses the API token.
+  if (import.meta.env.MODE === 'development' && apiToken === 'local-test-token') {
+    localStorage.removeItem('api_token');
+    localStorage.removeItem('user');
+    apiToken = null;
+    user = null;
+  }
 
   // Case 1: User has API token, redirect `/login` or `/send-otp` to dashboard
   if (apiToken) {
@@ -86,4 +113,3 @@ router.beforeEach((to, from, next) => {
   }
 });
 export default router;
-
